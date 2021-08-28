@@ -28,7 +28,7 @@ class TooltipManager
    ~TooltipManager();
 
     /** add a tooltip for a given symbol definition */
-    void addTooltip(const Definition *d);
+    void addTooltip(CodeOutputInterface &ol,const Definition *d);
 
     /** write the list of all collected tooltip to the given outputs */
     void writeTooltips(CodeOutputInterface &ol);

@@ -56,7 +56,10 @@ def transformDocs(doc):
 	doc = re.sub('\\\\ref +doxygen_usage', '"Doxygen usage"', doc)
 	doc = re.sub('\\\\ref +extsearch', '"External Indexing and Searching"',
 				 doc)
+	doc = re.sub('\\\\ref +layout', '"Changing the layout of pages"', doc)
 	doc = re.sub('\\\\ref +external', '"Linking to external documentation"',
+				 doc)
+	doc = re.sub('\\\\ref +doxygen_finetune', '"Fine-tuning the output"',
 				 doc)
 	doc = re.sub('\\\\ref +formulas', '"Including formulas"', doc)
 	# fallback for not handled
@@ -238,6 +241,7 @@ def parseOption(node):
 	adefval = node.getAttribute('altdefval')
 	depends = node.getAttribute('depends')
 	setting = node.getAttribute('setting')
+	orgtype = node.getAttribute('orgtype')
 	docC = prepCDocs(node);
 	if len(setting) > 0:
 		print("#if %s" % (setting))
@@ -335,7 +339,7 @@ def parseOption(node):
 		elif format == 'filedir':
 			print("  cl->setWidgetType(ConfigList::FileAndDir);")
 	elif type == 'obsolete':
-		print("  cfg->addObsolete(\"%s\");" % (name))
+		print("  cfg->addObsolete(\"%s\",ConfigOption::O_%s);" % (name,orgtype.capitalize()))
 	if len(setting) > 0:
 		print("#else")
 		print("  cfg->addDisabled(\"%s\");" % (name))
@@ -683,9 +687,7 @@ def main():
 		print("#ifndef CONFIGVALUES_H")
 		print("#define CONFIGVALUES_H")
 		print("")
-		print("#include <qdict.h>")
-		print("#include <qstrlist.h>")
-		print("#include <qcstring.h>")
+		print("#include \"qcstring.h\"")
 		print("#include \"containers.h\"")
 		print("#include \"settings.h\"")
 		print("")
@@ -695,34 +697,35 @@ def main():
 		print("    static ConfigValues &instance() { static ConfigValues theInstance; return theInstance; }")
 		for n in elem.childNodes:
 			if n.nodeType == Node.ELEMENT_NODE:
-				if (n.nodeName == "group"):
+				if n.nodeName == "group":
 					parseGroupMapGetter(n)
 		for n in elem.childNodes:
 			if n.nodeType == Node.ELEMENT_NODE:
-				if (n.nodeName == "group"):
+				if n.nodeName == "group":
 					parseGroupMapSetter(n)
 		print("    void init();")
-		print("    struct Info");
-		print("    {");
-		print("      enum Type { Bool, Int, String, List, Unknown };");
-		print("      Info(Type t,bool         ConfigValues::*b) : type(t), value(b) {}");
-		print("      Info(Type t,int          ConfigValues::*i) : type(t), value(i) {}");
-		print("      Info(Type t,QCString     ConfigValues::*s) : type(t), value(s) {}");
-		print("      Info(Type t,StringVector ConfigValues::*l) : type(t), value(l) {}");
-		print("      Type type;");
-		print("      union Item");
-		print("      {");
-		print("        Item(bool         ConfigValues::*v) : b(v) {}");
-		print("        Item(int          ConfigValues::*v) : i(v) {}");
-		print("        Item(QCString     ConfigValues::*v) : s(v) {}");
-		print("        Item(StringVector ConfigValues::*v) : l(v) {}");
-		print("        bool         ConfigValues::*b;");
-		print("        int          ConfigValues::*i;");
-		print("        QCString     ConfigValues::*s;");
-		print("        StringVector ConfigValues::*l;");
-		print("      } value;");
-		print("    };");
-		print("    const Info *get(const char *tag) const;");
+		print("    StringVector fields() const;")
+		print("    struct Info")
+		print("    {")
+		print("      enum Type { Bool, Int, String, List, Unknown };")
+		print("      Info(Type t,bool         ConfigValues::*b) : type(t), value(b) {}")
+		print("      Info(Type t,int          ConfigValues::*i) : type(t), value(i) {}")
+		print("      Info(Type t,QCString     ConfigValues::*s) : type(t), value(s) {}")
+		print("      Info(Type t,StringVector ConfigValues::*l) : type(t), value(l) {}")
+		print("      Type type;")
+		print("      union Item")
+		print("      {")
+		print("        Item(bool         ConfigValues::*v) : b(v) {}")
+		print("        Item(int          ConfigValues::*v) : i(v) {}")
+		print("        Item(QCString     ConfigValues::*v) : s(v) {}")
+		print("        Item(StringVector ConfigValues::*v) : l(v) {}")
+		print("        bool         ConfigValues::*b;")
+		print("        int          ConfigValues::*i;")
+		print("        QCString     ConfigValues::*s;")
+		print("        StringVector ConfigValues::*l;")
+		print("      } value;")
+		print("    };")
+		print("    const Info *get(const QCString &tag) const;")
 		print("  private:")
 		for n in elem.childNodes:
 			if n.nodeType == Node.ELEMENT_NODE:
@@ -740,7 +743,7 @@ def main():
 		print("#include \"configimpl.h\"")
 		print("#include <unordered_map>")
 		print("")
-		print("const ConfigValues::Info *ConfigValues::get(const char *tag) const");
+		print("const ConfigValues::Info *ConfigValues::get(const QCString &tag) const");
 		print("{");
 		print("  static const std::unordered_map< std::string, Info > configMap =");
 		print("  {");
@@ -749,7 +752,7 @@ def main():
 				if (n.nodeName == "group"):
 					parseGroupMapInit(n)
 		print("  };");
-		print("  auto it = configMap.find(tag);");
+		print("  auto it = configMap.find(tag.str());");
 		print("  return it!=configMap.end() ? &it->second : nullptr;");
 		print("}");
 		print("")
@@ -763,6 +766,26 @@ def main():
 			if n.nodeType == Node.ELEMENT_NODE:
 				if (n.nodeName == "group"):
 					parseGroupInit(n)
+		print("}")
+		print("")
+		print("StringVector ConfigValues::fields() const")
+		print("{")
+		print("  return {");
+		first=True
+		for n in elem.childNodes:
+			if n.nodeType == Node.ELEMENT_NODE:
+				if (n.nodeName == "group"):
+					for c in n.childNodes:
+						if c.nodeType == Node.ELEMENT_NODE:
+							name = c.getAttribute('id')
+							type = c.getAttribute('type')
+							if type!='obsolete':
+								if not first:
+									print(",")
+								first=False
+								sys.stdout.write('    "'+name+'"')
+		print("")
+		print("  };")
 		print("}")
 	elif (sys.argv[1] == "-cpp"):
 		print("/* WARNING: This file is generated!")
