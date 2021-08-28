@@ -323,7 +323,8 @@ void DocSets::addIndexItem(const Definition *context,const MemberDef *md,
     case SrcLangExt_D:       lang="d"; break;          // D
     case SrcLangExt_Java:    lang="java"; break;       // Java
     case SrcLangExt_JS:      lang="javascript"; break; // JavaScript
-    case SrcLangExt_Python:  lang="python"; break;     // Python
+      case SrcLangExt_Python:  lang="python"; break;     // Python
+      case SrcLangExt_Prolog:  lang="prolog"; break;     // Python
     case SrcLangExt_Fortran: lang="fortran"; break;    // Fortran
     case SrcLangExt_VHDL:    lang="vhdl"; break;       // VHDL
     case SrcLangExt_XML:     lang="xml"; break;        // DBUS XML

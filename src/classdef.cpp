@@ -115,6 +115,7 @@ class ClassDefImpl : public DefinitionMixin<ClassDefMutable>
     virtual bool isAbstract() const;
     virtual bool isObjectiveC() const;
     virtual bool isFortran() const;
+    virtual bool isProlog() const;
     virtual bool isCSharp() const;
     virtual bool isFinal() const;
     virtual bool isSealed() const;
@@ -379,7 +380,9 @@ class ClassDefAliasImpl : public DefinitionAliasMixin<ClassDef>
     virtual bool isObjectiveC() const
     { return getCdAlias()->isObjectiveC(); }
     virtual bool isFortran() const
-    { return getCdAlias()->isFortran(); }
+  { return getCdAlias()->isFortran(); }
+    virtual bool isProlog() const
+    { return getCdAlias()->isProlog(); }
     virtual bool isCSharp() const
     { return getCdAlias()->isCSharp(); }
     virtual bool isFinal() const
@@ -3864,7 +3867,22 @@ void ClassDefImpl::addUsedByClass(ClassDef *cd,const char *accessName,
 
 QCString ClassDefImpl::compoundTypeString() const
 {
-  if (getLanguage()==SrcLangExt_Fortran)
+    if (getLanguage()==SrcLangExt_Prolog)
+    {
+        switch (m_impl->compType) {
+            case Class:
+                return "predicate";
+            case Struct:
+                return "term";
+            case Interface:
+                return "directive";
+            case Exception:
+                return "exception";
+            default:
+                return "unknown";
+        }
+    }
+    if (getLanguage()==SrcLangExt_Fortran)
   {
     switch (m_impl->compType)
     {
@@ -4857,7 +4875,12 @@ bool ClassDefImpl::isObjectiveC() const
 
 bool ClassDefImpl::isFortran() const
 {
-  return getLanguage()==SrcLangExt_Fortran;
+    return getLanguage()==SrcLangExt_Fortran;
+}
+
+bool ClassDefImpl::isProlog() const
+{
+    return getLanguage()==SrcLangExt_Prolog;
 }
 
 bool ClassDefImpl::isCSharp() const

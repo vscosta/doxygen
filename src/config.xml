@@ -605,7 +605,15 @@ Go to the <a href="commands.html">next</a> section or return to the
 ]]>
       </docs>
     </option>
-    <option type='bool' id='OPTIMIZE_OUTPUT_JAVA' defval='0'>
+      <option type='bool' id='OPTIMIZE_OUTPUT_FOR_Prolog' defval='0'>
+      <docs>
+          <![CDATA[
+ Set the \c OPTIMIZE_OUTPUT_FOR_Prolog tag to \c YES if your project consists
+ of Prolog sources only.  The list of all members will be omitted, etc.
+]]>
+      </docs>
+      </option>
+      <option type='bool' id='OPTIMIZE_OUTPUT_JAVA' defval='0'>
       <docs>
 <![CDATA[
  Set the \c OPTIMIZE_OUTPUT_JAVA tag to \c YES if your project consists of Java or

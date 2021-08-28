@@ -75,6 +75,8 @@
 #include "htags.h"
 #include "pycode.h"
 #include "pyscanner.h"
+#include "prologcode.h"
+#include "prologscanner.h"
 #include "fortrancode.h"
 #include "fortranscanner.h"
 #include "xmlcode.h"
@@ -10050,10 +10052,12 @@ void initDoxygen()
                                                          make_parser_factory<XMLCodeParser>());
   Doxygen::parserManager->registerParser("sql",          make_parser_factory<NullOutlineParser>(),
                                                          make_parser_factory<SQLCodeParser>());
-  Doxygen::parserManager->registerParser("md",           make_parser_factory<MarkdownOutlineParser>(),
-                                                         make_parser_factory<FileCodeParser>());
+    Doxygen::parserManager->registerParser("md",           make_parser_factory<MarkdownOutlineParser>(),
+                                           make_parser_factory<FileCodeParser>());
+    Doxygen::parserManager->registerParser("prolog",           make_parser_factory<PrologOutlineParser>(),
+                                           make_parser_factory<PrologCodeParser>());
 
-  // register any additional parsers here...
+    // register any additional parsers here...
 
   initDefaultExtensionMapping();
   initClassMemberIndices();

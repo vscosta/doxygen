@@ -5535,6 +5535,7 @@ g_lang2extMap[] =
   { "c++",         "c",             SrcLangExt_Cpp      },
   { "slice",       "c",             SrcLangExt_Slice    },
   { "python",      "python",        SrcLangExt_Python   },
+  { "prolog",      "prolog",        SrcLangExt_Prolog   },
   { "fortran",     "fortran",       SrcLangExt_Fortran  },
   { "fortranfree", "fortranfree",   SrcLangExt_Fortran  },
   { "fortranfixed", "fortranfixed", SrcLangExt_Fortran  },
@@ -5623,8 +5624,11 @@ void initDefaultExtensionMapping()
   updateLanguageMapping(".m",        "objective-c");
   updateLanguageMapping(".M",        "objective-c");
   updateLanguageMapping(".mm",       "c");  // see bug746361
-  updateLanguageMapping(".py",       "python");
-  updateLanguageMapping(".pyw",      "python");
+    updateLanguageMapping(".py",       "python");
+    updateLanguageMapping(".pyw",      "python");
+    updateLanguageMapping(".pl",       "prolog");
+    updateLanguageMapping(".prolog",      "prolog");
+    updateLanguageMapping(".yap",      "prolog");
   updateLanguageMapping(".f",        "fortran");
   updateLanguageMapping(".for",      "fortran");
   updateLanguageMapping(".f90",      "fortran");
@@ -6644,7 +6648,8 @@ QCString langToString(SrcLangExt lang)
     case SrcLangExt_ObjC:     return "Objective-C";
     case SrcLangExt_Cpp:      return "C++";
     case SrcLangExt_JS:       return "JavaScript";
-    case SrcLangExt_Python:   return "Python";
+      case SrcLangExt_Prolog:   return "Prolog";
+      case SrcLangExt_Python:   return "Python";
     case SrcLangExt_Fortran:  return "Fortran";
     case SrcLangExt_VHDL:     return "VHDL";
     case SrcLangExt_XML:      return "XML";
@@ -6661,6 +6666,10 @@ QCString getLanguageSpecificSeparator(SrcLangExt lang,bool classScope)
   if (lang==SrcLangExt_Java || lang==SrcLangExt_CSharp || lang==SrcLangExt_VHDL || lang==SrcLangExt_Python)
   {
     return ".";
+  }
+  else if (lang==SrcLangExt_Prolog)
+  {
+      return ":";
   }
   else if (lang==SrcLangExt_PHP && !classScope)
   {

@@ -57,6 +57,8 @@
 #include "util.h"
 #include "reflist.h"
 
+#include "prologscanner.h"
+
 #define USE_STATE2STRING 0
 
 // forward declarations
@@ -137,6 +139,10 @@ static bool handleParBlock(yyscan_t yyscanner,const QCString &, const QCStringLi
 static bool handleEndParBlock(yyscan_t yyscanner,const QCString &, const QCStringList &);
 static bool handleParam(yyscan_t yyscanner,const QCString &, const QCStringList &);
 static bool handleRetval(yyscan_t yyscanner,const QCString &, const QCStringList &);
+static bool handlePredicate(yyscan_t yyscanner,const QCString &, const QCStringList &);
+static bool handleCPred(yyscan_t yyscanner,const QCString &, const QCStringList &);
+static  void predDoc(yyscan_t yyscanner,Entry *current);
+
 
 #if USE_STATE2STRING
 static const char *stateToString(int state);
@@ -184,7 +190,10 @@ static const std::map< std::string, DocCmdMap > docCmdMap =
   { "date",            { 0,                       CommandSpacing::Block     }},
   { "def",             { &handleDef,              CommandSpacing::Invisible }},
   { "defgroup",        { &handleDefGroup,         CommandSpacing::Invisible }},
-  { "deprecated",      { &handleDeprecated,       CommandSpacing::Block     }},
+ { "pred",            { &handlePredicate,        CommandSpacing::Invisible  }},
+  { "predicate",       { &handlePredicate,        CommandSpacing::Invisible  }},
+    { "cpred",         { &handleCPred,            CommandSpacing::Invisible  }},
+   { "deprecated",      { &handleDeprecated,       CommandSpacing::Block     }},
   { "details",         { &handleDetails,          CommandSpacing::Block     }},
   { "dir",             { &handleDir,              CommandSpacing::Invisible }},
   { "docbookinclude",  { 0,                       CommandSpacing::Inline    }},
@@ -386,6 +395,9 @@ struct commentscanYY_state
   QCString         xrefListTitle;
   Protection       protection = Public;
 
+  QCString name, current_module, source_module, text;
+  int arity;
+
   bool             xrefAppendFlag = FALSE;
   bool             inGroupParamFound = FALSE;
   int              braceCount = 0;
@@ -487,6 +499,26 @@ TMPLSPEC  "<"{BN}*[^>]+{BN}*">"
 MAILADDR   [a-z_A-Z0-9.+\-]+"@"[a-z_A-Z0-9\-]+("."[a-z_A-Z0-9\-]+)+[a-z_A-Z0-9\-]+
 RCSTAG    "$"{ID}":"[^\n$]+"$"
 
+ESCAPESEQ          ("\\"[\\n\\abdefnrstvz'"`]|"\\b"{BN}{BNS}|"\\u"{HEXD}+|"\\x"{
+HEXD}*|"\\"{OCTD}+)
+QSTRINGITEM        ({STRINGCHAR}|{ESCAPESEQ}|"''"|"\\'"|"\"")
+
+SQSTRING           ("'"({QoSTRINGITEM})*"'")
+
+PREDTAG               ("det"|"semidet"|"failure"|"nondet"|"multi"|"iso"|"depreca
+ted"|"dynamic"|"directive"|"meta")
+PREDINFO              ("."|{B}"is"?{B}{PREDTAG}","?{B})*{B}
+
+SKIPCHAR            ([^,)])
+PL_N0                 ([0-9]+)
+PL_IDENTIFIER        ([a-z][A-Za-z0-9_]*)
+PL_SYMBOL             ("/"[#&+-./:<>=?@\^~`\\]|[#&*+-.:<>=?@^~`\\][#&*+-./:<>=?@^~`\\])([#&*+-./:<>=?@^~`\\])*
+PL_SOLO              [;!,]
+PL_ATOM            ({PL_IDENTIFIER}|{PL_SYMBOL}+|{PL_SOLO})
+PL_ARG     ([+\-?:@!0-9][ \t]?)?[_A-Z]+[^ \n\t]+
+PL_INDICATOR        (({PL_ATOM}":")*("("{PL_ATOM}")"|{PL_ATOM})("/"|"//"){PL_N0})
+
+
 %option noyywrap
 
   /* comment parsing states. */
@@ -534,6 +566,12 @@ RCSTAG    "$"{ID}":"[^\n$]+"$"
 %x      GuardExpr
 %x      CdataSection
 %x      Noop
+
+%x      CPred
+%x      PredFunctor
+%x      PredArgs
+%x      PredInfo
+%x  SWIInline
 
 %%
 
@@ -1755,7 +1793,7 @@ RCSTAG    "$"{ID}":"[^\n$]+"$"
 
 
 <OverloadParam>{DOCNL}                  { // end of argument
-                                          if (*yytext=='\n') yyextra->lineNr++;
+                                              if (*yytext=='\n') yyextra->lineNr++;
                                           if (yyextra->functionProto.stripWhiteSpace().isEmpty())
                                           { // plain overload command
                                             addOutput(yyscanner,getOverloadDocs());
@@ -1859,6 +1897,205 @@ RCSTAG    "$"{ID}":"[^\n$]+"$"
                                               );
                                           BEGIN(Comment);
                                         }
+
+    /************  Prolog (PlDOC like ) compatibility *********************/
+
+
+
+<PredFunctor>{B}*{PL_ATOM}"("         {
+  // replace by an /
+  QCString text = yytext;
+  text = text.stripWhiteSpace();
+int len = text.length();
+ yyextra-> name = text;
+yyextra->name = yyextra->name.remove(len-1, 1);
+    yyextra->current->lang = SrcLangExt_Prolog;
+  yyextra->current->protection = Public;
+  yyextra->current->section = Entry::CLASSDOC_SEC;
+  yyextra->current->spec = ClassDef::Predicate;
+  addOutput(yyscanner,"<b>"+yyextra->name+ "</b>(" );
+ 		                        yyextra->arity = 1;
+                     BEGIN(PredArgs);
+}
+
+<PredFunctor>{B}*({PL_ATOM}":")       {
+		      QCString l = QCString(yytext), mod = "";
+		       yyextra->name=yytext;
+QCString text = yyextra->name.stripWhiteSpace();
+int len = text.length();
+ yyextra->source_module = yyextra->                                                                                                                                                                                                                                                              text.remove(len-1, 1);
+}
+
+<PredFunctor>{B}*{PL_ATOM}{B}+{PL_ARG}        {
+  addOutput(yyscanner,"<b>");
+                      addOutput(yyscanner, yytext );
+                    addOutput(yyscanner, "</b>" );
+                       QCString l = yytext, mod = "";
+                      l = l.copy().stripWhiteSpace();
+                      int m, n = l.find(' ');
+                      if ( n < 1) n = l.find('\t');
+                       if ( m < 1) m = l.findRev('\t');
+                     yyextra->current->name = l.left(n);
+yyextra->arity = 1;
+                             yyextra->current->lang = SrcLangExt_Prolog;
+predDoc(yyextra,yyextra->current);
+                      BEGIN(PredInfo);
+		    }
+
+<PredFunctor>{B}*{PL_ARG}{B}+{PL_ATOM}{B}+{PL_ARG}        {
+  addOutput(yyscanner,"<b>");
+                      addOutput(yyscanner, yytext );
+                    addOutput(yyscanner, "</b>" );
+                      QCString l = yytext, name = "", mod = "";
+                      l = l.copy().stripWhiteSpace();
+                      int n = l.find(' ');
+                      int m = l.findRev(' ');
+                      if ( n < 1) n = l.find('\t');
+                      if ( m < 1) m = l.findRev('\t');
+            yyextra->current->name = l.mid(n, m-n).stripWhiteSpace();
+yyextra->arity = 2;
+                      yyextra->current->lang = SrcLangExt_Prolog;
+predDoc(yyscanner, yyextra->current);
+                      BEGIN(PredInfo);
+}
+
+<PredFunctor>{PL_ARG}{B}*{PL_ATOM}{B}+ {
+  addOutput(yyscanner,"<b>");
+                     addOutput(yyscanner, yytext );
+                    addOutput(yyscanner, "</b>" );
+                      QCString l = yytext, name = "", mod = "";
+                      l = l.copy().stripWhiteSpace();
+                      int m = l.findRev(' ');
+                      if ( m < 1) m = l.findRev('\t');
+                      l = l.right(l.length()- m);
+            yyextra->name = l;
+yyextra->arity = 1;
+predDoc(yyscanner,yyextra->current);
+                      BEGIN(PredInfo);
+}
+
+<PredFunctor>{B}*{PL_ATOM}{B}*/("is"|"\n") {
+                      QCString l = yytext, name = "", mod = "";
+                      l = l.copy().stripWhiteSpace();
+  addOutput(yyscanner,"<b>");
+                    addOutput(yyscanner, l );
+                    addOutput(yyscanner, "</b>" );
+            yyextra->name = l;
+yyextra->arity = 0;
+predDoc(yyscanner,yyextra->current);
+                      BEGIN(PredInfo);
+}
+<PredArgs>{SKIPCHAR}*","         {
+    		        addOutput(yyscanner, yytext );
+                yyextra->text += yytext;
+                      yyextra->arity++;
+}
+
+<PredArgs>{SKIPCHAR}*")"         {
+                    addOutput(yyscanner, yytext );
+predDoc(yyscanner,yyextra->current);
+                      BEGIN(PredInfo);
+}
+
+ <PredFunctor>. {
+   addOutput(yyscanner, yytext );
+  BEGIN(Comment);
+}
+
+<PredInfo>{
+    "iso"|"ISO" { //yyextra->iso = "ISO ";
+addOutput(yyscanner, "<p>defined in the <em>ISO</em> standard<p> ");
+    }
+
+    "semidet"|"semi-det"|"det"|"nondet" {
+addOutput(yyscanner, " <p>properties:  ");
+addOutput(yyscanner, yytext );
+addOutput(yyscanner,"erministic<p/>\n");
+}
+
+   "dynamic"|"directive"|"multifile" { //yyextra->iso = "ISO ";
+addOutput(yyscanner, " <p>properties: ");
+addOutput(yyscanner, yytext );
+addOutput(yyscanner,"<p/>\n");
+  }
+
+"is" {}
+
+[ \t,]+ {
+}
+
+     "\n" {
+        yyextra->lineNr++;
+addOutput(yyscanner, "\n");
+        BEGIN(Comment)   ;
+    }
+
+    [^\n] {
+        addOutput(yyscanner, yytext );
+    }
+
+ }
+
+ "=|"  {
+    addOutput(yyscanner, "`" );
+  }
+
+ "|="  {
+    addOutput(yyscanner, "`" );
+  }
+
+  ^"---+"[ \t] {
+    addOutput(yyscanner, "## " );
+  }
+
+  ^"---++"[ \t] {
+    addOutput(yyscanner, "### " );
+  }
+
+  ^"---+++"[ \t] {
+    addOutput(yyscanner, "#### " );
+  }
+
+  ^"---++++"[ \t] {
+    addOutput(yyscanner, "##### " );
+  }
+
+ "*|"  {
+   addOutput(yyscanner,"*" );
+  }
+
+"|*"  {
+   addOutput(yyscanner,"*" );
+  }
+
+  "="[a-zA-Z0-9]([a-zA-Z0-9:/_.]*[a-zA-Z0-9])?("=")? {
+   if (yytext[strlen(yytext)-1] == '=')
+     yytext[strlen(yytext)-1] = '\0';
+   addOutput(yyscanner, "<code>" );
+   addOutput(yyscanner, yytext+1 );
+   addOutput(yyscanner, "</code>" );
+ }
+
+
+  ^\n[ \t]*"=="[ \t]*$		{
+    addOutput(yyscanner, "~~~~{.prolog}" );
+   BEGIN(SWIInline);
+
+  }
+
+
+<SWIInline>{
+  \n[ \t]*"=="[ \t]*"\n" {
+    addOutput(yyscanner, "~~~~\n" );
+    BEGIN(Comment);
+  }
+
+  \n[^\n]*$      {
+      addOutput(yyscanner, yytext );
+    }
+  }
+
+
 
   /* ----- handle argument of the copydoc command ------- */
 
@@ -1979,6 +2216,51 @@ static bool handleClass(yyscan_t yyscanner,const QCString &cmd, const QCStringLi
   BEGIN( ClassDocArg1 );
   return stop;
 }
+static  void predDoc(yyscan_t yyscanner,Entry *current)
+{
+  struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
+   Pred p = Pred(yyextra->source_module, yyextra->name, yyextra->arity);
+                      yyextra->text += yytext;
+//current->includeName = yyextra->text.copy();
+//yyextra->current_predicate = current;
+                              yyextra->current->name = p.predName(yyextra->current_module);
+//    if (!yyextra->predCache[p.predName()]) {
+//      yyextra->predCache.insert(yyscanner, p.predName(),new QCString(text));
+//      }
+  setOutput(yyscanner,OutputDoc);
+}
+
+
+void x();
+
+void x() {}
+
+static bool handlePredicate(yyscan_t yyscanner,const QCString &s, const QCStringList &)
+{
+   struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
+  bool stop=makeStructuralIndicator(yyscanner, Entry::CLASSDOC_SEC);
+      yyextra->current->lang       = SrcLangExt_Prolog;
+  yyextra->current->type = "predicate";
+if (!yyextra->current_module) {
+yyextra->source_module = yyextra->current_module =  QCString("prolog");
+} else
+yyextra->source_module = yyextra->current_module;
+  BEGIN( PredFunctor );
+  setOutput(yyscanner,OutputBrief);
+  return stop;
+}
+
+static bool handleCPred(yyscan_t yyscanner,const QCString &, const QCStringList &)
+{
+  struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
+  bool stop=makeStructuralIndicator(yyscanner,Entry::CLASSDOC_SEC);
+  // setOutput(OutputBrief);
+  BEGIN( CPred );
+
+  return stop;
+}
+
+
 
 static bool handleHeaderFile(yyscan_t yyscanner,const QCString &, const QCStringList &)
 {
@@ -3296,7 +3578,7 @@ bool CommentScanner::parseCommentBlock(/* in */     OutlineParserInterface *pars
         "Documentation block ended while inside a \\parblock. Missing \\endparblock");
   }
 
-  yyextra->current->doc=stripLeadingAndTrailingEmptyLines(yyextra->current->doc,yyextra->current->docLine);
+  //yyextra->current->doc=stripLeadingAndTrailingEmptyLines(yyextra->current->doc,yyextra->current->docLine);
 
   if (yyextra->current->section==Entry::FILEDOC_SEC && yyextra->current->doc.isEmpty())
   {

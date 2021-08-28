@@ -105,6 +105,7 @@ class ClassDef : public Definition
                         Exception, //=Entry::EXCEPTION_SEC
                         Service,   //=Entry::CLASS_SEC
                         Singleton, //=Entry::CLASS_SEC
+                        Predicate, //=Entry::CLASS_SEC
                       };
 
     virtual ~ClassDef() {}
@@ -284,6 +285,9 @@ class ClassDef : public Definition
 
     /** Returns TRUE if this class is implemented in Fortran */
     virtual bool isFortran() const = 0;
+
+    /** Returns TRUE if this class is implemented in Prolog */
+    virtual bool isProlog() const = 0;
 
     /** Returns TRUE if this class is implemented in C# */
     virtual bool isCSharp() const = 0;

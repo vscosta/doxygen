@@ -110,8 +110,10 @@ set_source_files_properties(${GENERATED_SRC}/layout_default.xml.h PROPERTIES GEN
 
 set(LEX_FILES scanner 
     code
-    pyscanner
-    pycode
+        pyscanner
+        pycode
+        prologscanner
+        prologcode
     fortranscanner
     fortrancode
     vhdlcode
@@ -192,8 +194,10 @@ add_library(doxymain STATIC
     ${GENERATED_SRC}/fortrancode.l.h
     ${GENERATED_SRC}/fortranscanner.l.h
     ${GENERATED_SRC}/pre.l.h
-    ${GENERATED_SRC}/pycode.l.h
-    ${GENERATED_SRC}/pyscanner.l.h
+        ${GENERATED_SRC}/pycode.l.h
+        ${GENERATED_SRC}/pyscanner.l.h
+        ${GENERATED_SRC}/prologcode.l.h
+        ${GENERATED_SRC}/prologscanner.l.h
     ${GENERATED_SRC}/scanner.l.h
     ${GENERATED_SRC}/sqlcode.l.h
     ${GENERATED_SRC}/vhdlcode.l.h
@@ -207,9 +211,11 @@ add_library(doxymain STATIC
     ${GENERATED_SRC}/fortrancode.cpp
     ${GENERATED_SRC}/fortranscanner.cpp
     ${GENERATED_SRC}/pre.cpp
-    ${GENERATED_SRC}/pycode.cpp
-    ${GENERATED_SRC}/pyscanner.cpp
-    ${GENERATED_SRC}/scanner.cpp
+        ${GENERATED_SRC}/pycode.cpp
+        ${GENERATED_SRC}/pyscanner.cpp
+        ${GENERATED_SRC}/prologcode.cpp
+        ${GENERATED_SRC}/prologscanner.cpp
+        ${GENERATED_SRC}/scanner.cpp
     ${GENERATED_SRC}/sqlcode.cpp
     ${GENERATED_SRC}/vhdlcode.cpp
     ${GENERATED_SRC}/xmlcode.cpp

@@ -662,7 +662,7 @@ class TranslateContext::Private
       {
         return theTranslator->trPackages();
       }
-      else if (m_fortranOpt || m_sliceOpt)
+      else if (m_fortranOpt || m_sliceOpt || m_prologOpt)
       {
         return theTranslator->trModules();
       }
@@ -693,7 +693,7 @@ class TranslateContext::Private
       {
         return theTranslator->trPackages();
       }
-      else if (m_fortranOpt || m_sliceOpt)
+      else if (m_fortranOpt || m_sliceOpt || m_prologOpt)
       {
         return theTranslator->trModulesList();
       }
@@ -708,7 +708,7 @@ class TranslateContext::Private
       {
         return theTranslator->trPackageMembers();
       }
-      else if (m_fortranOpt || m_sliceOpt)
+      else if (m_fortranOpt || m_sliceOpt || m_prologOpt)
       {
         return theTranslator->trModulesMembers();
       }
@@ -1224,7 +1224,8 @@ class TranslateContext::Private
       }
 
       m_javaOpt    = Config_getBool(OPTIMIZE_OUTPUT_JAVA);
-      m_fortranOpt = Config_getBool(OPTIMIZE_FOR_FORTRAN);
+        m_fortranOpt = Config_getBool(OPTIMIZE_FOR_FORTRAN);
+        m_prologOpt = Config_getBool(OPTIMIZE_OUTPUT_FOR_Prolog);
       m_vhdlOpt    = Config_getBool(OPTIMIZE_OUTPUT_VHDL);
       m_sliceOpt   = Config_getBool(OPTIMIZE_OUTPUT_SLICE);
     }
@@ -1235,6 +1236,7 @@ class TranslateContext::Private
   private:
     bool m_javaOpt;
     bool m_fortranOpt;
+    bool m_prologOpt;
     bool m_vhdlOpt;
     bool m_sliceOpt;
     static PropertyMapper<TranslateContext::Private> s_inst;
@@ -1540,7 +1542,8 @@ class DefinitionContext
         case SrcLangExt_Cpp:      result="cpp";      break;
         case SrcLangExt_JS:       result="js";       break;
         case SrcLangExt_Python:   result="python";   break;
-        case SrcLangExt_Fortran:  result="fortran";  break;
+          case SrcLangExt_Fortran:  result="fortran";  break;
+          case SrcLangExt_Prolog:  result="prolog";  break;
         case SrcLangExt_VHDL:     result="vhdl";     break;
         case SrcLangExt_XML:      result="xml";      break;
         case SrcLangExt_SQL:      result="sql";      break;
@@ -5930,7 +5933,8 @@ class ClassIndexContext::Private
     }
     TemplateVariant title() const
     {
-      static bool fortranOpt = Config_getBool(OPTIMIZE_FOR_FORTRAN);
+        static bool fortranOpt = Config_getBool(OPTIMIZE_FOR_FORTRAN);
+     //   static bool prologOpt = Config_getBool(OPTIMIZE_FOR_PROLOG);
       static bool vhdlOpt    = Config_getBool(OPTIMIZE_OUTPUT_VHDL);
       if (fortranOpt)
       {
@@ -7040,7 +7044,8 @@ class NamespaceTreeContext::Private
     TemplateVariant title() const
     {
       static bool javaOpt    = Config_getBool(OPTIMIZE_OUTPUT_JAVA);
-      static bool fortranOpt = Config_getBool(OPTIMIZE_FOR_FORTRAN);
+        static bool fortranOpt = Config_getBool(OPTIMIZE_FOR_FORTRAN);
+        static bool prologOpt = Config_getBool(OPTIMIZE_OUTPUT_FOR_Prolog                           );
       static bool vhdlOpt    = Config_getBool(OPTIMIZE_OUTPUT_VHDL);
       static bool sliceOpt   = Config_getBool(OPTIMIZE_OUTPUT_SLICE);
       if (javaOpt || vhdlOpt)

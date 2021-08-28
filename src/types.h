@@ -50,10 +50,11 @@ enum SrcLangExt
   SrcLangExt_ObjC     = 0x00100,
   SrcLangExt_Cpp      = 0x00200,
   SrcLangExt_JS       = 0x00400,
-  SrcLangExt_Python   = 0x00800,
+    SrcLangExt_Python   = 0x00800,
   SrcLangExt_Fortran  = 0x01000,
   SrcLangExt_VHDL     = 0x02000,
   SrcLangExt_XML      = 0x04000,
+    SrcLangExt_Prolog   = 0x08000,
   //SrcLangExt_Tcl      = 0x08000, // no longer supported
   SrcLangExt_Markdown = 0x10000,
   SrcLangExt_SQL      = 0x20000,
