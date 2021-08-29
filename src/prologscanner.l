@@ -14,7 +14,7 @@
  * input used in their production; they are not affected by this license.
  *
  */
-/*  This code is based on the doxygen python module, initially developed by the MoxyPyDoxy team
+/*  This code is based on the doxygen Prolog module, initially developed by the MoxyPyDoxy team
  *  (Linda Leong, Mike Rivera, Kim Truong, and Gabriel Estrada)
  *  in Spring 2005 as part of CS 179E: Compiler Design Project
  *  at the University of California, Riverside; the course was
@@ -44,14 +44,7 @@
 #include <assert.h>
 #include <ctype.h>
 
-#include <qarray.h>
-#include <qstack.h>
-#include <qregexp.h>
-#include <unistd.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qdir.h>
-#include <string.h>
+#include <string>
 
     // have access to anchors before Entry
 
@@ -59,6 +52,8 @@
 
 #include "outputgen.h"
 #include "entry.h"
+#include "fileinfo.h"
+#include "dir.h"
 #include "message.h"
 #include "config.h"
 #include "doxygen.h"
@@ -80,100 +75,14 @@
 #include "entry.h"
 #include "groupdef.h"
 #include "membergroup.h"
-#include "qfile.h"
-#include "qregexp.h"
 
+#include "qcstring.h"
+#include "prolog.h"
 
-    /* ----------------------------------------------------------------- */
+#define YY_NO_INPUT 1
+#define YY_NO_UNISTD_H 1
 
-
-class Literal {
-public:
-typedef  enum {
-	       PL_NONE = 0x0,
-	       PL_ATOMIC = 0x1,
-	       PL_ATOM = 0x2,
-	       PL_GOAL = 0x4,
-	       PL_ENTER_BRA = 0x8,
-	       PL_ENTER_SQB = 0x10,
-	       PL_ENTER_CRB = 0x20,
-	       PL_ENTER_GOAL = 0x40,
-	       PL_ENTER_COMPOUND = 0x80,
-	       PL_INNER_BRA = 0x100,
-	       PL_INNER_SQB = 0x200,
-	       PL_INNER_CRB = 0x400,
-	       PL_COMPOUND = 0x800,
-	       PL_ENTER_MODULE = 0x1000
-} token_t ;
-
-  QCString n, m;
-  uint a;
-  token_t t;
-  
-Literal(QCString source_module) {
-
-  t = Literal::PL_NONE;
-    n = "";
-    m =  source_module;
-    a = 0;
-};
-  
-Literal(token_t t0, QCString m0, QCString n0, uint a0) {
-    t = t0;
-    n = n0;
-    m = m0;
-    a = a0;
-  }
-
-};
-
-class Clause {
-public:
- typedef enum {
-	       CLI_NONE,
-	       CLI_DIRECTIVE,
-	       CLI_HEAD,
-	       CLI_NECK,
-	       CLI_BODY,
-	       FLIT_COMPLETED
-  } state_t;
-  state_t state;
-  QCString text;
-  QCString n;
-  QCString m;
-  uint a;
-int ctx; //> YY_START
-  std::vector<Literal> q;
-
-    Clause(QCString current_module) {
-
-  q = {};
-    state = CLI_NONE;
-    m = current_module;
-    text = n = "";
-    a = 0;
-      };
-
-    Clause() {
-  q = {};
-    state = CLI_NONE;
-    m = "prolog";
-    text = n = "";
-    a = 0;
-      };
-
-    void reset(QCString current_module)
-    {
-      state = CLI_NONE;
-      q = {};
-      m = current_module;
-      text = n = "";
-      a = 0;
-    };
-
-  int eval();
-};
-
+#define USE_STATE2STRING 0
 
     struct prologscannerYY_state
     {
@@ -183,7 +92,6 @@ int ctx; //> YY_START
 	const char *inputString = 0;
 	yy_size_t inputPosition = 0;
 	int ignore;
-	QFile inputFile;
 
 	Protection protection;
 
@@ -202,10 +110,10 @@ QCString ind_arity, ind_mod;
 	Specifier virt;
 	bool system_module;
 	bool new_module;
-
+    int docBlockContext = 0;
 	int savedDocBlockOuter;
 	int savedDocBlockInner;
-	QCString docBlock;
+	QCString docBlock, docBlockSpecial;
 	QCString docBlockName;
 	bool docBlockInBody;
 	bool docBlockJavaStyle;
@@ -218,13 +126,12 @@ QCString ind_arity, ind_mod;
 
 	uint arity;
 
-	QDict<char> prologFileCache;
-	QDict<char> systemPredTable;
-	QDict<std::shared_ptr<Entry>> varNameCache;
-	QDict<char> exportNameCache;
-	QDict<char> groupEntryCache;
+	StringUnorderedMap prologFileCache;
+	StringUnorderedMap systemPredTable;
+	StringUnorderedMap exportNameCache;
+	StringUnorderedMap groupEntryCache;
 	QCString current_module = 0, source_module;
-	QDict<char> foreignCache;
+	StringUnorderedMap foreignCache;
 
 	QCString packageScope;
 	QCString pName;
@@ -270,9 +177,11 @@ Clause current_clause;
     static QCString newModule( yyscan_t yyscanner, const char *modname);
 
 
+/*
     static QRegExp ra("/[0-9]+$");
     static QRegExp rm("^[a-z][a-zA-Z_0-9]*:");
     static QRegExp rmq("^'[^']+':");
+*/
 
     static void newEntry( yyscan_t yyscanner );
     static bool prepComment( yyscan_t yyscanner, const char * text, bool &brief, bool slash_star);
@@ -286,19 +195,13 @@ Clause current_clause;
     static bool addPredDecl( yyscan_t yyscanner, QCString mod, QCString name, uint arity);
     static char *sliceArgument(const char *inp, int c) ;
     static void startCommentBlock( yyscan_t yyscanner, bool brief);
-    const char *fileToModule(yyscan_t yyscanner, QString item);
+    const char *fileToModule(yyscan_t yyscanner, QCString item);
 
 
-    // Toggle for some debugging info
-    //#define DBG_CTX(x) fprintf x
-#define DBG_CTX(x)				\
-    do {					\
-    } while (0)
+#if USE_STATE2STRING
+static const char *stateToString(int state);
+#endif
 
-#define YY_NEVER_INTERACTIVE 1
-#define YY_NO_INPUT 1
-
-#define USE_STATE2STRING 0
 
     static yy_size_t yyread(yyscan_t yyscanner, char *buf,yy_size_t max_size);
 
@@ -372,11 +275,11 @@ BORDER            ([^A-Za-z0-9])
 
 STRINGCHAR         [^\\"'\n]
 ESCAPESEQ          ("\\"[\\n\\abdefnrstvz'"`]|"\\b"{BN}{BNS}|"\\u"{HEXD}+|"\\x"{HEXD}*|"\\"{OCTD}+)
-QSTRINGITEM        ({STRINGCHAR}|{ESCAPESEQ}|"''"|"\\'"|"\"")
-DQSTRINGITEM       ({STRINGCHAR}|{""|"'")
+QCStringITEM        ({STRINGCHAR}|{ESCAPESEQ}|"''"|"\\'"|"\"")
+DQCStringITEM       ({STRINGCHAR}|{""|"'")
 
-SQSTRING           ("'"({QSTRINGITEM})*"'")
-DQSTRING           ("\""({QSTRINGITEM})*"\"")
+SQCString           ("'"({QCStringITEM})*"'")
+DQCString           ("\""({QCStringITEM})*"\"")
 
 SY		   [#&*+\-/:<=>?@\\\^`~]
 SYNOSTAR	   [#&+.\-/:<=>?@\\\^`~]
@@ -391,11 +294,11 @@ SOLO		  [!]
 
 CMD [@\\][a-zA-z0-9_]+
 
-ATOM		   ({IDENTIFIER}|{SQSTRING}|{SYMBOL}|{SOLO})
+ATOM		   ({IDENTIFIER}|{SQCString}|{SYMBOL}|{SOLO})
 
-NOC	   ({IDENTIFIER}|{SQSTRING})
+NOC	   ({IDENTIFIER}|{SQCString})
 
-ATOMIC             ({ATOM}|{VAR}|{NUMBER}|{DQSTRING})
+ATOMIC             ({ATOM}|{VAR}|{NUMBER}|{DQCString})
 
 
 INDICATOR          (({ATOM}":")*("("{ATOM}")"|{ATOM})("/"|"//"){DECNUMBER})
@@ -506,7 +409,7 @@ yyextra->source_module = *new QCString(s);
             yyextra->current_clause.q.back().t <= Literal::PL_GOAL&&
             yyextra->current_clause.q.back().t <= Literal::PL_GOAL )
 	 yyextra->current_clause.q.pop_back();
-size_t n = yyextra->current_clause.q.size();
+//size_t n = yyextra->current_clause.q.size();
 //if (n)
 //	     yyextra->current_clause.q[n-1].t++;
 	 }
@@ -527,7 +430,7 @@ bool e = yyextra->current_clause.q.empty();
      else if (	     s == "[")   tag = Literal::PL_ENTER_SQB ;
 		     else tag = Literal::PL_ENTER_CRB;
 			     }
- yyextra->current_clause.q.push_back(* new Literal(tag,yyextra->source_module.copy(),s.copy(),0));
+ yyextra->current_clause.q.push_back(* new Literal(tag,yyextra->source_module,s,0));
 }
 
 <Search>{B}("("|"["|"{"){B} {
@@ -537,7 +440,7 @@ Literal::token_t tag;    s = s.stripWhiteSpace();
      else if (	     s == "[")   tag = Literal::PL_ENTER_SQB ;
 		     else tag = Literal::PL_ENTER_CRB;
 			    
-     yyextra->current_clause.q = std::vector<Literal>( 1,Literal(tag,yyextra->source_module.copy(),s.copy(),tag));
+     yyextra->current_clause.q = std::vector<Literal>( 1,Literal(tag,yyextra->source_module,s,tag));
 			 }
 
 	 
@@ -551,9 +454,9 @@ Literal l = yyextra->current_clause.q.back();
     if (l.t == Literal::PL_ENTER_GOAL) {
 	if (yyextra->current_clause.state == Clause::CLI_HEAD &&
 	    yyextra->current_clause.q.size() == 1) {
-	yyextra->current_clause.m = l.m.copy();
+	yyextra->current_clause.m = l.m;
 	yyextra->arity = yyextra->current_clause.a = l.a;
-	yyextra->pName = yyextra->current_clause.n = (l.n.copy());
+	yyextra->pName = yyextra->current_clause.n = (l.n);
 	yyextra->current_clause.state = Clause::CLI_NECK;
 }
 	yyextra->current_clause.q.pop_back();
@@ -626,23 +529,23 @@ Literal l = yyextra->current_clause.q.back();
 
 
 <Search>({NUMBER}|{VAR})"::"   {
-     yyextra->current->program+=yytext;
+     yyextra->current->program<<yytext;
 
   }
 
- <Search>({ATOM}|{NUMBER}|{VAR}|{DQSTRING}|{B}|{NEWLINE}) {
-     yyextra->current->program+=yytext;
+ <Search>({ATOM}|{NUMBER}|{VAR}|{DQCString}|{B}|{NEWLINE}) {
+     yyextra->current->program<<yytext;
     BEGIN(Head);
   }
 
 
 
-<Head,Body>({ATOM}|{NUMBER}|{VAR}|{DQSTRING}|{B}|{NEWLINE}) {
-     yyextra->current->program+=yytext;
+<Head,Body>({ATOM}|{NUMBER}|{VAR}|{DQCString}|{B}|{NEWLINE}) {
+     yyextra->current->program<<yytext;
   }
 
 {EOT} {
-    yyextra->current->program+=yytext;
+    yyextra->current->program<<yytext;
     BEGIN(Search);
 		}
 
@@ -654,7 +557,7 @@ Literal l = yyextra->current_clause.q.back();
       yyextra->headDone= TRUE;
     }
     yyextra->grammar = FALSE;
-    yyextra->current->program+=yytext;
+    yyextra->current->program<<yytext;
     yyextra->current->bodyLine  = yylineno;
     BEGIN( Body );
   }
@@ -665,7 +568,7 @@ Literal l = yyextra->current_clause.q.back();
       yyextra->headDone= TRUE;
     }
     yyextra->grammar = TRUE;
-    yyextra->current->program+=yytext;
+    yyextra->current->program<<yytext;
     yyextra->current->bodyLine  = yylineno;
     BEGIN( Body );
   }
@@ -673,7 +576,7 @@ Literal l = yyextra->current_clause.q.back();
 
   {B}{EOT}         {
     // facts
-    //yyextra->current->program+=yytext;
+    //yyextra->current->program<<yytext;
     //printf("\nDONE\n %s \n*******\n", yyextra->current->program.data());
     endOfDef(yyscanner);
     yyextra->current_clause.reset(yyextra->current_module);
@@ -682,7 +585,7 @@ Literal l = yyextra->current_clause.q.back();
   }
 
   [^\n]       {
-    yyextra->current->program+=yytext;
+    yyextra->current->program<<yytext;
     yyextra->defVal += yytext;
  }
 }
@@ -711,7 +614,7 @@ Literal l = yyextra->current_clause.q.back();
 
 "/"[^*] {}
 
-		{SQSTRING} {}
+		{SQCString} {}
 
 
 
@@ -912,9 +815,7 @@ static void initParser( yyscan_t yyscanner) {
  yyextra->current_clause =  	Clause("prolog");
 if (yyextra->firstCall) {
     yyextra->exportNameCache.clear();
-    yyextra->exportNameCache.setAutoDelete(FALSE);
   }
-  yyextra->varNameCache.setAutoDelete(FALSE);     // just another cache
 }
 
 static void initEntry( yyscan_t yyscanner) {
@@ -925,7 +826,7 @@ static void initEntry( yyscan_t yyscanner) {
   yyextra->current->virt       = yyextra->virt;
   yyextra->current->stat       = yyextra->stat;
   yyextra->current->lang       = SrcLangExt_Prolog; 
-  yyextra->current->program    = nullptr; 
+ // yyextra->current->program    = nullptr;
 }
 
 static void newEntry( yyscan_t yyscanner ) {
@@ -959,7 +860,7 @@ void foundVariable( yyscan_t yyscanner ) {
   n->fileName = yyextra->yyFileName;
   n->startLine = yyextra-> yyLineNr;
   n->bodyLine = yyextra-> yyLineNr;
-  assert(n->name);
+//  assert(n->name);
 }
 
 static char *sliceArgument(const char *inp, int c) {
@@ -1017,47 +918,65 @@ static void startCommentBlock( yyscan_t yyscanner, bool brief) {
 
 typedef enum { BRIEF, BRIEF_EMPTY, BLANK_LINE, DOC } state_t;
 
-static bool prepComment( yyscan_t yyscanner, const char * text, bool &brief, bool slash_star) {
-  struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
-  size_t sz = strlen(text);
-  char *otext = (char*)malloc(sz+16);
+static bool prepComment( yyscan_t yyscanner, const char * txt, bool &brief, bool slash_star) {
+QCString t;
+ QCString text = txt;
+ struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
+  yyextra->docBlockContext   = YY_START;
+  yyextra->docBlockInBody    = FALSE;
+  yyextra->docBlockJavaStyle = TRUE;
+  yyextra->docBrief = TRUE;
+  yyextra->docBlock.resize(0);
+  QCString otext = "", line;
   int c = (slash_star ? 3 : 2);
-  int ch0 =  (slash_star ? '*' : '%');
+  int ch;
   int nltext=0,nlines=0,o=0;
-  int ch = text[c++];
+ while ((ch=text[c++])!='\n' && ch) otext += ch;
+ otext += '\n';
 
-  while (ch!='\0') {
-      otext[o++] = ch;
-      nltext = c;
-      while ((ch=text[c++])=='\n') {
-	  otext[o++] = '\n';
-	  nltext = c;
-      }
-      while  (ch==' ' || ch=='\t') ch = text[c++];
-      if (ch == ch0) {
-	  while  (ch==ch0) ch = text[c++];
-	  if (ch==' '||ch=='\t')
-	      c++;
-      } else {
-	  while(nltext<c)
-	      otext[o++]=text[nltext++];
-      }
-      if (nlines)
-	  brief = false;
-      while ((ch = text[c++])!='\n' && ch!='\0' ) {
-	  otext[o++]=ch;
-	  }
-  }
-  if (slash_star)
-      o-=2;
-  if (c == nltext+1) {
-      otext[o++] = '\n';
-  }
-  otext[o]='\0';
-  if (otext[0]=='\0')
-    return false;
+ while (ch!='\0') {
+    line = "";
+        while ((ch=text[c++])!='\n' && ch
 
-  yyextra->docBlock =  otext;
+        ) {
+     line += ch;
+     }
+         int i = 0;
+        if (line[0] == ' ') {
+            if (line[1] == ' ') {
+              if (line[2] == ' ') {
+                 i = 3;
+                 } else {
+                 i = 2;
+                 } }else  {i = 1; }
+                 } else {i = 0;}
+
+                 if (line[i] == '*') {
+                      if (line[i+1] == ' ')
+                      i ++;
+               } else if (line[i] == '/' && line[i+1] == '*') {
+                     if (line[i+2] == ' ')
+                     i ++;
+                     } else  if (line[i] == '%') {
+                         if (line[++i] != '%')
+                            i--;
+                         if (line[++i] == ' '||line[i] == '\n') {
+                         i ++;
+                         } else {
+                         i = 0;
+                         }
+                         } else {
+                         i = 0;
+                         }
+
+                        otext += line.data()+i;
+ otext+= '\n';
+
+}
+    	  while ((c=otext.find("*/\n")) > 0 )
+    	  otext = otext.remove(c,2);
+
+  yyextra->docBlock = * new QCString (otext);
   return true;
 }
 
@@ -1066,7 +985,7 @@ static void handleCommentBlock( yyscan_t yyscanner, const QCString &doc, bool br
     struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
 
   yyextra->docBlockInBody=FALSE;
-  
+
   if (!yyextra->current->doc.isEmpty())
   {
     yyextra->current->doc=yyextra->current->doc.stripWhiteSpace()+"\n\n";
@@ -1096,9 +1015,8 @@ static void handleCommentBlock( yyscan_t yyscanner, const QCString &doc, bool br
         Config_getBool(MARKDOWN_SUPPORT))
      ) // need to start a new entry
   {
-    if (needsEntry)
-    {
-      newEntry(yyscanner);
+    if (needsEntry){
+  newEntry(yyscanner);
     }
   }
   if (needsEntry)
@@ -1119,51 +1037,12 @@ static void endOfDef( yyscan_t yyscanner ) {
 }
 
 
-static QString getPrologFile(  QDir dir, QString file);
-
-QString checkFile(  QFileInfo *finfo, QString file) {
- QString item = finfo->absFilePath(), xabs;
-  if (!QDir(item).exists()) {
-  if (QDir(item + ".yap").exists())
-    item = item + ".yap";
-  else if (QDir(item + ".pl").exists())
-    item = item + ".pl";
-  else if ((xabs = getPrologFile(QDir(item), file)) != 0) {}
-    item = xabs;
-}  else  {
-    item = "";
-    }
-  return item;
-}
-
-static QString getPrologFile(  QDir dir, QString file) {
- size_t dabs = dir.canonicalPath().length();
-  dir.setFilter(QDir::Dirs);
-  const QFileInfoList *list = dir.entryInfoList();
-  QFileInfoListIterator it(*list); // create list iterator
-  QFileInfo *finfo;                // pointer for traversing
-
-  while ((finfo = it.current())) { // foreach(QFileInfo finfo, list) {
-
-    QString abs = finfo->absFilePath();
-    if (abs.length() > dabs) {
-      QString xabs;
-      if ((xabs = checkFile(finfo, file)).isEmpty()) {
-        return xabs;
-      }
-    }
-    ++it;
-  }
-  return 0;
-}
-
-
 static std::shared_ptr<Entry> buildPredEntry(yyscan_t yyscanner, Pred p) {
     struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
     std::shared_ptr<Entry> newp;
     fprintf(stderr,"|| ************* %s  \n", p.predName(yyextra->current_module).data());
-    QCString pname = p.predName(yyextra->current_module);
-    QCString mod = p.m;
+    QCString pname = *new QCString(p.predName(yyextra->current_module));
+    QCString mod = * new QCString(  p.m);
 
     if (yyextra->current_predicate && pname == yyextra->current_predicate->name) {
 	return yyextra->current_predicate;
@@ -1180,7 +1059,7 @@ static std::shared_ptr<Entry> buildPredEntry(yyscan_t yyscanner, Pred p) {
   yyextra->current_root->moveToSubEntryAndRefresh(newp);
   yyextra->current->argList.clear();
   yyextra->current->section = Entry::CLASS_SEC;
-  yyextra->current->spec = ClassDef::Predicate;
+  yyextra->current->spec = ClassDef::Struct;
   yyextra->current->type = "predicate";
   yyextra->current->name = p.link();
   if (mod == "user" || (mod == "prolog" && pname.find("\'") < 0)) {
@@ -1189,7 +1068,8 @@ static std::shared_ptr<Entry> buildPredEntry(yyscan_t yyscanner, Pred p) {
     yyextra->current->protection = Public;
   } else
     yyextra->current->protection = Private;
-  for (uint i = 0; i < yyextra->ind_arity; i++) {
+    unsigned int arity = QCString(yyextra->ind_arity).toUInt();
+  for (uint i = 0; i < arity; i++) {
 
     char buf[16];
     Argument a ;
@@ -1234,8 +1114,8 @@ static bool addPredDecl( yyscan_t yyscanner, QCString name) {
   e = predBind(yyscanner, p);
   e->protection = Public;
   e->section = Entry::USINGDECL_SEC;
-  e->spec = ClassDef::Predicate;
-  yyextra->exportNameCache.insert(e->name, e->name.data());
+  e->spec = ClassDef::Struct;
+  //yyextra->exportNameCache.insert(e->name, e->name.data());
   if (e == yyextra->current)
     newEntry(yyscanner);
   return true;
@@ -1243,7 +1123,6 @@ static bool addPredDecl( yyscan_t yyscanner, QCString name) {
 
 
 static bool addPredDecl( yyscan_t yyscanner, QCString mod, QCString name, uint arity) {
-    struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
     std:: shared_ptr<Entry> e;
     QCString s;
 
@@ -1251,46 +1130,13 @@ static bool addPredDecl( yyscan_t yyscanner, QCString mod, QCString name, uint a
     e = predBind(yyscanner,*p);
     e->protection = Public;
     e->section = Entry::USINGDECL_SEC;
-    e->spec = ClassDef::Predicate;
+    e->spec = ClassDef::Struct;
     e->name = p->link();
-    yyextra->exportNameCache.insert(p->link(), p->predName(yyextra->current_module).data());
+   // yyextra->exportNameCache.insert(p->link(), p->predName(yyextra->current_module).data());
     newEntry(yyscanner);
     return true;
 }
 
-
-const char *fileToModule(yyscan_t yyscanner, QString item) {
-   struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
- if (item.find("library(") == 0) {
-    item = item.mid(8, item.length() - 9).stripWhiteSpace();
-    item = getPrologFile( QDir(), item);
-    if (item == "0") {
-      if (yyextra->system_module)
-        item = "prolog";
-      else
-        item = "user";
-    }
-  } else {
-    item = item.stripWhiteSpace();
-    if (QDir("./" + item).exists())
-      item = "./" + item;
-    else if (QDir("./" + item + ".yap").exists())
-      item = "./" + item + ".yap";
-    else if (QDir("./" + item + ".pl").exists())
-      item = "./" + item + ".pl";
-    else
-      return "user";
-    QDir d = QDir(item);
-    d.convertToAbs();
-    return d.dirName().data();
-  }
-  if (QFileInfo(item).exists()) {
-    return yyextra->prologFileCache[item.data()];
-  }
-  if (yyextra->system_module)
-    return "prolog";
-  return "user";
-}
 
 static QCString symbs = "#&*+;-./:<=>?@\\^~";
 
@@ -1374,7 +1220,7 @@ void mymsg( yyscan_t yyscanner, const char *input) { /* printf("Got you %s", inp
 bool normalizePredName__( yyscan_t yyscanner, QCString curMod, const char *input, QCString &omod,
                          QCString &oname, uint &arity) {
   QCString text = input, txt;
-    text = text.copy().stripWhiteSpace();
+    text = text.stripWhiteSpace();
     QCString newE;
     int  i = 0;
     {
@@ -1399,8 +1245,9 @@ bool normalizePredName__( yyscan_t yyscanner, QCString curMod, const char *input
             if (i > 0) {
                 bool ok;
                 QCString left = text.left(i - 1);
-                unsigned int p = left.toUInt(&ok);
-                if (ok) text = text.right(text.length() - i - 2).stripWhiteSpace();
+                left.toUInt(&ok);
+                if (ok)
+                text = text.right(text.length() - i - 2).stripWhiteSpace();
             } else {
                 break;
             }
@@ -1679,10 +1526,6 @@ PrologOutlineParser::PrologOutlineParser() : p(std::make_unique<PrologOutlinePar
 #endif
 }
 
-PrologOutlineParser::~PrologOutlineParser()
-{
-  prologscannerYYlex_destroy(p->yyscanner);
-}
 
 static void parseCompounds(yyscan_t yyscanner,std::shared_ptr<Entry> rt)
 {
@@ -1692,12 +1535,12 @@ static void parseCompounds(yyscan_t yyscanner,std::shared_ptr<Entry> rt)
   for (size_t i=0; i<rt->children().size(); ++i)
   {
     std::shared_ptr<Entry> ce = rt->children()[i];
-    if (!ce->program.isEmpty())
+    if (!ce->program.empty())
     {
       //fprintf(stderr,"parseCompounds: -- %s (line %d) ---------\n%s\n---------------\n",
       //  ce->name.data(), ce->bodyLine, ce->program.data());
       // init scanner state
-      yyextra->inputString = ce->program;
+      //yyextra->inputString = ce->program;
       yyextra->inputPosition = 0;
       prologscannerYYrestart( 0, yyscanner );
       if (ce->section&Entry::COMPOUND_MASK)
@@ -1722,7 +1565,7 @@ static void parseCompounds(yyscan_t yyscanner,std::shared_ptr<Entry> rt)
 
        prologscannerYYlex(yyscanner) ;
       yyextra->lexInit=TRUE;
-      ce->program.resize(0);
+      //ce->program.resize(0);
 
       yyextra->commentScanner.leaveCompound(yyextra->yyFileName,yyextra->yyLineNr,name);
 
@@ -1731,38 +1574,38 @@ static void parseCompounds(yyscan_t yyscanner,std::shared_ptr<Entry> rt)
   }
 }
 
- static void parsePMain(yyscan_t yyscanner, const char *fileName,const char *fileBuf,std::shared_ptr<Entry>
+ static void parseMain(yyscan_t yyscanner, const QCString &fileName,
+ const char *fileBuf,const std::shared_ptr<Entry> &
 			rt)
 {
 
    struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
  initParser(yyscanner);
  int off = 4;
+ if (fileBuf==0 || fileBuf[0]=='\0') return;
 
   yyextra->inputString = fileBuf;
   yyextra->inputPosition = 0;
       yyextra->current            = std::make_shared<Entry>();
-      initEntry(yyscanner);
   yyextra->protection    = Private;
   yyextra->mtype         = Method;
-  yyextra->stat         = false;
+  yyextra->stat         = FALSE;
   yyextra->virt          = Normal;
-  yyextra->specialBlock = false;
+ yyextra->current_root=rt;
+ yyextra->specialBlock = false;
+
   yyextra->SWIStyle = false;
   yyextra->system_module = false;
   yyextra->new_module = false;
-yyextra->current_root=rt;
  yyextra->current_clause = Clause("prolog");
-  yyextra->inputFile.setName(fileName);
-  if (yyextra->inputFile.open(IO_ReadOnly))
-    {
-      yyextra->yyLineNr = 1 ;
+
+       yyextra->yyLineNr = 1 ;
       yyextra-> yyFileName = fileName;
       //setContext();
      msg("Parsing file %s...\n",yyextra->yyFileName.data());
-      yyextra->current_root = rt;
-}
-QFileInfo fi(fileName);
+
+FileInfo fi(fileName.str());
+  QCString baseName=fi.baseName();
 
   yyextra->current            = std::make_shared<Entry>();
   initEntry(yyscanner);
@@ -1774,10 +1617,12 @@ QFileInfo fi(fileName);
     yyextra->current->bodyLine  = yyextra->yyLineNr;
 
 
-  yyextra->current_root  = yyextra->current;
-
   rt->moveToSubEntryAndRefresh(yyextra->current);
 
+  yyextra->current_root = rt;
+
+  yyextra->current            = std::make_shared<Entry>();
+  initEntry(yyscanner);
  initParser(yyscanner);
 
 
@@ -1797,7 +1642,7 @@ yyextra->current_module = "prolog";
   showScannerTree( yyscanner,off, rt, true );
   yyextra->commentScanner.leaveFile(yyextra->yyFileName,yyextra->yyLineNr);
 
-  yyextra->current_root->program.resize(0);
+ // yyextra->current_root->program.resize(0);
 
 
   //yyextra->current_root      = new std::shared_ptr<Entry>;
@@ -1814,7 +1659,7 @@ yyextra->current_module = "prolog";
 
       yyextra->commentScanner.leaveFile(yyextra->yyFileName,yyextra->yyLineNr);
 
-      yyextra->current_root->program.resize(0);
+   //   yyextra->current_root->program.resize(0);
       yyextra->current = 0;
       yyextra->current_root = 0;
       yyextra->current_module = 0;
@@ -1823,28 +1668,35 @@ yyextra->current_module = "prolog";
 
       parseCompounds(yyscanner,yyextra->current_root);
 
-      yyextra->inputFile.close();
+      //yyextra->inputFile.close();
 }
 
 
-void PrologOutlineParser::parseInput(const char *fileName,
-                                       const char *fileBuf,
-                                       const std::shared_ptr<Entry> &root,
-                                       ClangTUParser * /*clangParser*/)
+PrologOutlineParser::~PrologOutlineParser()
 {
-   struct yyguts_t *yyg = (struct yyguts_t*)p->yyscanner;
-    yyextra->thisParser = this;
-    printlex(yy_flex_debug, TRUE, __FILE__, fileName);
-    parsePMain(p->yyscanner, fileName,fileBuf,root);
-    printlex(yy_flex_debug, FALSE, __FILE__, fileName);
+ /* prologscannerYYlex_destroy(p->yyscanner); */
 }
 
-bool PrologOutlineParser::needsPreprocessing(const QCString &) const
+
+
+void PrologOutlineParser::parseInput(const QCString &fileName,
+                                                               const char *fileBuf,
+                                                               const std::shared_ptr<Entry> &root,
+                                                               ClangTUParser * /*clangParser*/)
+                          {   struct yyguts_t *yyg = (struct yyguts_t*)p->yyscanner;
+    yyextra->thisParser = this;
+    printlex(yy_flex_debug, TRUE, __FILE__, qPrint(fileName));
+    ::parseMain(p->yyscanner, fileName,fileBuf,root);
+    printlex(yy_flex_debug, FALSE, __FILE__, qPrint(fileName));
+}
+
+ bool PrologOutlineParser::needsPreprocessing(const QCString &)
+ const
 {
   return FALSE;
 }
 
-void PrologOutlineParser::parsePrototype(const char *text)
+ void PrologOutlineParser::parsePrototype(const QCString &text)
 {
   //::parsePrototype(p->yyscanner,text);
 

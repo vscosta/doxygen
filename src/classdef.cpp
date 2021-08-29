@@ -4920,7 +4920,7 @@ CodeSymbolType ClassDefImpl::codeSymbolType() const
     case Category:  return CodeSymbolType::Category;  break;
     case Exception: return CodeSymbolType::Exception; break;
     case Service:   return CodeSymbolType::Service;   break;
-    case Singleton: return CodeSymbolType::Singleton; break;
+      case Singleton: return CodeSymbolType::Singleton; break;
   }
   return CodeSymbolType::Class;
 }

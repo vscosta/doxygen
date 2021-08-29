@@ -17,7 +17,6 @@
 
 #include <stdio.h>
 
-#include "prologscanner.h"
 #include "prologcode.h"
 #include "message.h"
 #include "scanner.h"
@@ -36,6 +35,8 @@
 #include "scopedtypevariant.h"
 #include "symbolresolver.h"
 
+#include "prolog.h"
+
 // Toggle for some debugging info
 //#define DBG_CTX(x) fprintf x
 #define DBG_CTX(x) do { } while(0)
@@ -48,7 +49,6 @@
 struct prologcodeYY_state
 {
   std::unordered_map< std::string, ScopedTypeVariant > codeClassMap;
- ClassSDict     codeClassSDict;
  QCString       curClassName;
  QCString       comment;
 
@@ -62,7 +62,7 @@ struct prologcodeYY_state
   bool           collectXRefs;
   int            inputLines;      //!< number of line in the code fragment
   int	          yyLineNr;        //!< current line number
-  FileDef *      sourceFileDef;
+  const FileDef *      sourceFileDef;
   const MemberDef *    currentMemberDef;
    const Definition *   currentDefinition;
    bool           includeCodeFragment;
@@ -106,7 +106,8 @@ static int countLines(yyscan_t yyscanner);
 static void setCurrentDoc(yyscan_t yyscanner,const QCString &anchor);
 static void addToSearchIndex(const char *text);
 static void startCodeLine(yyscan_t yyscanner);
-static void codify(yyscan_t yyscanner,const char* text);
+static void codify(yyscan_t yyscanner,QCString & text);
+static void codify(yyscan_t yyscanner,const char * text);
 static void endCodeLine(yyscan_t yyscanner);
 static void nextCodeLine(yyscan_t yyscanner);
 static void writeMultiLineCodeLink(yyscan_t yyscanner,
@@ -240,11 +241,12 @@ COMPOUND	      {ATOM}"("
 	 yyextra->source_module = yyextra->current_module;
 	size_t i =  yyextra->text.find("(");
 	startFontClass( yyscanner, "keyword");
-	codify( yyscanner, yyextra->text.left(i+1).data());
+	QCString t =  yyextra->text.left(i+1);
+	codify( yyscanner,t);
 	endFontClass(yyscanner);
 	 yyextra->text =  yyextra->text.remove(0, i+1);
 	startFontClass( yyscanner, "preprocessor");
-	codify( yyscanner,yyextra->text.data());
+	codify( yyscanner,yyextra->text);
 	endFontClass(yyscanner);
 	if (s[0] == 'm') {
 	     yyextra->text = cannonical_module(  yyextra->text , parent_mod);
@@ -282,7 +284,7 @@ COMPOUND	      {ATOM}"("
 	 yyextra->name  =  yyextra->name.left(f);
 	 yyextra->name =  yyextra->name.stripWhiteSpace();
 	if (((size_t)f > yyextra->name.length())) {
-	    codify( yyscanner, yyextra->text.left(f- yyextra->name.length()));
+	    codify( yyscanner, yyextra->text.left(f- yyextra->name.length()).data());
 	}
 	 yyextra->buf =  yyextra->text.right( yyextra->text.length()-f);
 	 yyextra->level =1;
@@ -565,75 +567,6 @@ codify( yyscanner,yytext);
  */
 
 
-class PrologCallContext
-{
-  public:
-    struct Ctx
-    {
-      Ctx() : name( ), type( ), cd(0) {}
-      QCString name;
-      QCString type;
-      ClassDef *cd;
-    };
-
-    PrologCallContext()
-    {
-      m_classList.append(new Ctx);
-      m_classList.setAutoDelete(TRUE);
-    }
-
-    virtual ~PrologCallContext() {}
-
-    void setClass(ClassDef *cd)
-    {
-      Ctx *ctx = m_classList.getLast();
-      if (ctx)
-      {
-        ctx->cd=cd;
-      }
-    }
-    void pushScope()
-    {
-      m_classList.append(new Ctx);
-    }
-
-    void popScope(yyscan_t yyscanner)
-    {
-      struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
-      if (m_classList.count()>1)
-      {
-	Ctx *ctx = m_classList.getLast();
-	if (ctx)
-	{
-	   yyextra->name = ctx->name;
-	   yyextra->type = ctx->type;
-	}
-	m_classList.removeLast();
-      }
-      else
-      {
-      }
-    }
-
-    void clear()
-    {
-      m_classList.clear();
-      m_classList.append(new Ctx);
-    }
-
-    ClassDef *getClass() const
-    {
-      Ctx *ctx = m_classList.getLast();
-
-      if (ctx)
-        return ctx->cd;
-      else
-        return 0;
-    }
-
-  private:
-    QList<Ctx> m_classList;
-};
 
 
 static QCString
@@ -714,7 +647,7 @@ static void startCodeLine(yyscan_t yyscanner)
     //lineNumber.sprintf("%05d", yyextra->yyLineNr);
     //lineAnchor.sprintf("l%05d", yyextra->yyLineNr);
 
-    Definition *d   =  yyextra->sourceFileDef->getSourceDefinition( yyextra->yyLineNr);
+    const Definition *d   =  yyextra->sourceFileDef->getSourceDefinition( yyextra->yyLineNr);
     //printf("startCodeLine %d d=%p\n", yyextra->yyLineNr,d);
     // yyextra->code->startLineNumber();
 
@@ -724,7 +657,7 @@ static void startCodeLine(yyscan_t yyscanner)
        yyextra->currentMemberDef =  yyextra->sourceFileDef->getSourceMember( yyextra->yyLineNr);
       // yyextra->insideBody = FALSE;
        yyextra->searchingForBody = TRUE;
-       yyextra->realScope = d->name().copy();
+       yyextra->realScope = d->name();
       //printf("Real scope: '%s'\n", yyextra->realScope.data());
        yyextra->bodyCurlyCount = 0;
       QCString lineAnchor;
@@ -764,6 +697,13 @@ static void codify( yyscan_t yyscanner,const char* text)
    yyextra->code->codify(text);
 }
 
+
+static void codify( yyscan_t yyscanner,QCString & text)
+{
+    struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
+   yyextra->code->codify(text.data());
+}
+
 static void endCodeLine(yyscan_t yyscanner)
 {
      struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
@@ -795,10 +735,11 @@ static void writeMultiLineCodeLink(yyscan_t yyscanner,
 {
     struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
   bool sourceTooltips = Config_getBool(SOURCE_TOOLTIPS);
-  yyextra->tooltipManager.addTooltip(d);
+  yyextra->tooltipManager.addTooltip(ol,d);
   QCString ref  = d->getReference();
   QCString file = d->getOutputFileBase();
   QCString anchor = d->anchor();
+
   QCString tooltip;
   if (!sourceTooltips) // fall back to simple "title" tooltips
   {
@@ -816,13 +757,12 @@ static void writeMultiLineCodeLink(yyscan_t yyscanner,
        yyextra->yyLineNr++;
       *(p-1)='\0';
       //printf("writeCodeLink(%s,%s,%s,%s)\n",ref,file,anchor,sp);
-      ol.writeCodeLink(ref,file,anchor,sp,tooltip);
-      nextCodeLine(yyscanner);
+      ol.writeCodeLink(d->codeSymbolType(),ref,file,anchor,QCString(sp,p-sp-1),tooltip);
     }
     else
     {
-      //printf("writeCodeLink(%s,%s,%s,%s)\n",ref,file,anchor,sp);
-      ol.writeCodeLink(ref,file,anchor,sp,tooltip);
+      //printf("writeCodeLink(%s,%s,%s,%s)\n",ref,file,anchor,QCString(sp,p-sp-1),tooltip);
+      ol.writeCodeLink(d->codeSymbolType(),ref,file,anchor,sp,tooltip);
       done=TRUE;
     }
   }
@@ -883,7 +823,7 @@ static void codifyLines(yyscan_t yyscanner, char *text)
 static void codifyLines(yyscan_t yyscanner, const QCString &str)
 {
   char *tmp= (char *)malloc(str.length()+1);
-  qstrcpy(tmp, str);
+  qstrcpy(tmp, str.data());
   codifyLines(yyscanner, tmp);
   free(tmp);
 }
@@ -902,8 +842,8 @@ generateClassOrGlobalLink(yyscan_t yyscanner, CodeOutputInterface &ol,const QCSt
   //printf("%s cd=%p\n",className.data(),cd);
   if (cd && cd->isLinkable()) // is it a linkable class
 	{
-		writeMultiLineCodeLink(yyscanner, ol,cd,oname);
-		addToSearchIndex(className);
+		writeMultiLineCodeLink(yyscanner, ol,cd,oname.data());
+		addToSearchIndex(className.data());
         return true;
         }
         return false;
@@ -992,20 +932,20 @@ void  PrologCodeParser::resetCodeParserState()
 }
 
 void  PrologCodeParser::parseCode(CodeOutputInterface &codeOutIntf,
-    const char *scopeName,
-    const QCString &input,
-    SrcLangExt /*lang*/,
-    bool isExampleBlock,
-    const char *exampleName,
-    FileDef *fileDef,
-    int startLine,
-    int endLine,
-    bool inlineFragment,
-    const MemberDef *memberDef,
-    bool showLineNumbers,
-    const Definition *searchCtx,
-    bool collectXRefs
-    )
+                                            const QCString &scopeName,
+                                            const QCString &input,
+                                            SrcLangExt lang,
+                                            bool isExampleBlock,
+                                            const QCString &exampleName,
+                                            const FileDef *fileDef,
+                                            int startLine,
+                                            int endLine,
+                                            bool inlineFragment,
+                                            const MemberDef *memberDef,
+                                            bool showLineNumbers,
+                                            const Definition *searchCtx,
+                                            bool collectXrefs
+                            )
 {
   yyscan_t yyscanner = p->yyscanner;
   struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
@@ -1013,9 +953,8 @@ void  PrologCodeParser::parseCode(CodeOutputInterface &codeOutIntf,
   //--------------------------------------
   if (input.isEmpty()) return;
   printlex(yy_flex_debug, TRUE, __FILE__, fileDef ? fileDef->fileName().data(): NULL);
-   yyextra->codeClassSDict.setAutoDelete(TRUE);
    yyextra->code = &codeOutIntf;
-   yyextra->inputString   = input;
+   yyextra->inputString   = input.data();
    yyextra->inputPosition = 0;
    yyextra->currentFontClass = 0;
    yyextra->needsTermination = FALSE;
@@ -1032,14 +971,14 @@ void  PrologCodeParser::parseCode(CodeOutputInterface &codeOutIntf,
 
    yyextra->exampleBlock  = isExampleBlock;
    yyextra->exampleName   = exampleName;
-   yyextra->sourceFileDef = fileDef;
+   yyextra->sourceFileDef =fileDef;
     yyextra->symbolResolver.setFileScope(fileDef);
 
   bool cleanupSourceDef = FALSE;
   if (yyextra->exampleBlock && fileDef==0)
   {
     // create a dummy filedef for the example
-     yyextra->sourceFileDef = createFileDef("",(exampleName?exampleName:"generated"));
+     yyextra->sourceFileDef = createFileDef("",(exampleName.size()?exampleName:"generated"));
     cleanupSourceDef = TRUE;
   }
   if ( yyextra->sourceFileDef)

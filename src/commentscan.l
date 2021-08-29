@@ -59,7 +59,7 @@ typedef yyguts_t *yyscan_t;
 #include "util.h"
 #include "reflist.h"
 
-#include "prologscanner.h"
+#include "prolog.h"
 
 #define USE_STATE2STRING 0
 
@@ -143,8 +143,8 @@ static bool handleParBlock(yyscan_t yyscanner,const QCString &, const StringVect
 static bool handleEndParBlock(yyscan_t yyscanner,const QCString &, const StringVector &);
 static bool handleParam(yyscan_t yyscanner,const QCString &, const StringVector &);
 static bool handleRetval(yyscan_t yyscanner,const QCString &, const StringVector &);
-static bool handlePredicate(yyscan_t yyscanner,const QCString &, const QCStringVector &);
-static bool handleCPred(yyscan_t yyscanner,const QCString &, const QCStringVector &);
+static bool handlePredicate(yyscan_t yyscanner,const QCString &, const StringVector &);
+static bool handleCPred(yyscan_t yyscanner,const QCString &, const StringVector &);
 static  void predDoc(yyscan_t yyscanner,Entry *current);
 
 
@@ -937,13 +937,21 @@ STopt  [^\n@\\]*
                                           lineCount(yyscanner);
                                         }
 <Comment>"."                            { // potential end of a JavaDoc style comment
-                                          addOutput(yyscanner,*yytext);
-                                          if (yyextra->briefEndsAtDot)
                                           {
                                             setOutput(yyscanner,OutputDoc);
                                             yyextra->briefEndsAtDot=FALSE;
                                           }
                                         }
+<Comment>{PL_INDICATOR}                         { // newline
+
+QCString i = yytext;
+//Pred p =Pred(i, yyextra->current_module);
+//               addAnchor(yyscanner,i);
+addOutput(yyscanner,"@ref ");
+addOutput(yyscanner,i);
+addOutput(yyscanner," ");
+
+}
 <Comment>{DOCNL}                             { // newline
                                           addOutput(yyscanner,yytext);
                                           if (*yytext == '\n') yyextra->lineNr++;
@@ -1985,7 +1993,7 @@ yyextra->name = yyextra->name.remove(len-1, 1);
     yyextra->current->lang = SrcLangExt_Prolog;
   yyextra->current->protection = Public;
   yyextra->current->section = Entry::CLASSDOC_SEC;
-  yyextra->current->spec = ClassDef::Predicate;
+  yyextra->current->spec = ClassDef::Struct;
   addOutput(yyscanner,"<b>"+yyextra->name+ "</b>(" );
  		                        yyextra->arity = 1;
                      BEGIN(PredArgs);
@@ -2004,14 +2012,14 @@ int len = text.length();
                       addOutput(yyscanner, yytext );
                     addOutput(yyscanner, "</b>" );
                        QCString l = yytext, mod = "";
-                      l = l.copy().stripWhiteSpace();
+                      l = l.stripWhiteSpace();
                       int m, n = l.find(' ');
                       if ( n < 1) n = l.find('\t');
                        if ( m < 1) m = l.findRev('\t');
                      yyextra->current->name = l.left(n);
 yyextra->arity = 1;
                              yyextra->current->lang = SrcLangExt_Prolog;
-predDoc(yyextra,yyextra->current);
+predDoc(yyscanner,yyextra->current);
                       BEGIN(PredInfo);
 		    }
 
@@ -2020,7 +2028,7 @@ predDoc(yyextra,yyextra->current);
                       addOutput(yyscanner, yytext );
                     addOutput(yyscanner, "</b>" );
                       QCString l = yytext, name = "", mod = "";
-                      l = l.copy().stripWhiteSpace();
+                      l = l.stripWhiteSpace();
                       int n = l.find(' ');
                       int m = l.findRev(' ');
                       if ( n < 1) n = l.find('\t');
@@ -2037,7 +2045,7 @@ predDoc(yyscanner, yyextra->current);
                      addOutput(yyscanner, yytext );
                     addOutput(yyscanner, "</b>" );
                       QCString l = yytext, name = "", mod = "";
-                      l = l.copy().stripWhiteSpace();
+                      l = l.stripWhiteSpace();
                       int m = l.findRev(' ');
                       if ( m < 1) m = l.findRev('\t');
                       l = l.right(l.length()- m);
@@ -2049,7 +2057,7 @@ predDoc(yyscanner,yyextra->current);
 
 <PredFunctor>{B}*{PL_ATOM}{B}*/("is"|"\n") {
                       QCString l = yytext, name = "", mod = "";
-                      l = l.copy().stripWhiteSpace();
+                      l = l.stripWhiteSpace();
   addOutput(yyscanner,"<b>");
                     addOutput(yyscanner, l );
                     addOutput(yyscanner, "</b>" );
@@ -2151,7 +2159,7 @@ addOutput(yyscanner, "\n");
 
 
   ^\n[ \t]*"=="[ \t]*$		{
-    addOutput(yyscanner, "~~~~{.prolog}" );
+    addOutput(yyscanner, "~~~{.prolog}" );
    BEGIN(SWIInline);
 
   }
@@ -2159,7 +2167,7 @@ addOutput(yyscanner, "\n");
 
 <SWIInline>{
   \n[ \t]*"=="[ \t]*"\n" {
-    addOutput(yyscanner, "~~~~\n" );
+    addOutput(yyscanner, "~~~\n" );
     BEGIN(Comment);
   }
 
@@ -2312,13 +2320,13 @@ void x();
 
 void x() {}
 
-static bool handlePredicate(yyscan_t yyscanner,const QCString &s, const QCStringList &)
+static bool handlePredicate(yyscan_t yyscanner,const QCString &s, const StringVector &)
 {
    struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
   bool stop=makeStructuralIndicator(yyscanner, Entry::CLASSDOC_SEC);
       yyextra->current->lang       = SrcLangExt_Prolog;
   yyextra->current->type = "predicate";
-if (!yyextra->current_module) {
+if (yyextra->current_module == "") {
 yyextra->source_module = yyextra->current_module =  QCString("prolog");
 } else
 yyextra->source_module = yyextra->current_module;
@@ -2327,7 +2335,7 @@ yyextra->source_module = yyextra->current_module;
   return stop;
 }
 
-static bool handleCPred(yyscan_t yyscanner,const QCString &, const QCStringList &)
+static bool handleCPred(yyscan_t yyscanner,const QCString &, const StringVector &)
 {
   struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
   bool stop=makeStructuralIndicator(yyscanner,Entry::CLASSDOC_SEC);
