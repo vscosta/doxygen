@@ -557,7 +557,7 @@ codify( yyscanner,yytext);
 }
 
 <*><<EOF>> {
-       yyterminate();
+                            yyterminate();
 }
 
 
@@ -987,7 +987,8 @@ void  PrologCodeParser::parseCode(CodeOutputInterface &codeOutIntf,
   }
   
   yyextra->current_module = "user";
-   yyextra->source_module = yyextra->current_module;
+     yyextra->includeCodeFragment = inlineFragment;
+yyextra->source_module = yyextra->current_module;
 
    yyextra->includeCodeFragment = inlineFragment;
    // Starts line 1 on the output

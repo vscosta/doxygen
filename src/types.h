@@ -215,7 +215,6 @@ enum class CodeSymbolType
   Exception,
   Service,
   Singleton,
-  Predicate,
   // Other container types
   Concept,
   Namespace,

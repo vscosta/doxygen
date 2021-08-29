@@ -942,7 +942,7 @@ STopt  [^\n@\\]*
                                             yyextra->briefEndsAtDot=FALSE;
                                           }
                                         }
-<Comment>{PL_INDICATOR}                         { // newline
+<*>{PL_INDICATOR}                         { // newline
 
 QCString i = yytext;
 //Pred p =Pred(i, yyextra->current_module);
@@ -1307,6 +1307,7 @@ addOutput(yyscanner," ");
 
 <FileDocArg1>{DOCNL}                    { // no file name specified
                                           unput_string(yytext,yyleng);
+                                          //if (*yytext=='\n') yyextra->lineNr++;
                                           //if (*yytext=='\n') yyextra->lineNr++;
                                           //addOutput(yyscanner,'\n');
                                           BEGIN( Comment );

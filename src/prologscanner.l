@@ -825,8 +825,9 @@ static void initEntry( yyscan_t yyscanner) {
   yyextra->current->mtype      = yyextra->mtype;
   yyextra->current->virt       = yyextra->virt;
   yyextra->current->stat       = yyextra->stat;
-  yyextra->current->lang       = SrcLangExt_Prolog; 
- // yyextra->current->program    = nullptr;
+   yyextra->commentScanner.initGroupInfo(yyextra->current.get());
+ yyextra->current->lang       = SrcLangExt_Prolog;
+  yyextra->stat = FALSE;
 }
 
 static void newEntry( yyscan_t yyscanner ) {
@@ -840,7 +841,8 @@ static void newEntry( yyscan_t yyscanner ) {
   struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
   yyextra->previous = yyextra->current;
   yyextra->current_root->moveToSubEntryAndRefresh(yyextra->current);
-  initEntry(yyscanner);
+      yyextra->current            = std::make_shared<Entry>();
+initEntry(yyscanner);
 
 }
 
@@ -949,14 +951,14 @@ QCString t;
                  } else {
                  i = 2;
                  } }else  {i = 1; }
-                 } else {i = 0;}
+                 }
 
                  if (line[i] == '*') {
-                      if (line[i+1] == ' ')
+                      if (line[i+1] == ' ' || line[i+1]=='\n')
                       i ++;
                } else if (line[i] == '/' && line[i+1] == '*') {
-                     if (line[i+2] == ' ')
-                     i ++;
+                     if (line[i+2] == ' ' || line[i+2] == '\n')
+                     i +=2;
                      } else  if (line[i] == '%') {
                          if (line[++i] != '%')
                             i--;
@@ -1016,6 +1018,7 @@ static void handleCommentBlock( yyscan_t yyscanner, const QCString &doc, bool br
      ) // need to start a new entry
   {
     if (needsEntry){
+
   newEntry(yyscanner);
     }
   }
@@ -1028,7 +1031,8 @@ static void handleCommentBlock( yyscan_t yyscanner, const QCString &doc, bool br
 static void endOfDef( yyscan_t yyscanner ) {
 
   struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
-  // printf("endOfDef at=%d\n",yyextra->yyLineNr);
+  // printf("endOfDef at=%d\n",yyextra->yyLineNr);static void endOfDef( yyscan_t yyscanner ) {
+
   newEntry(yyscanner);
   // reset depth of term.
   yyextra->callLevel = yyextra->argLevel = 0;
@@ -1044,10 +1048,9 @@ static std::shared_ptr<Entry> buildPredEntry(yyscan_t yyscanner, Pred p) {
     QCString pname = *new QCString(p.predName(yyextra->current_module));
     QCString mod = * new QCString(  p.m);
 
-    if (yyextra->current_predicate && pname == yyextra->current_predicate->name) {
-	return yyextra->current_predicate;
+    if (yyextra->current && pname == yyextra->current->name) {
+	return yyextra->current;
     }
-    newp            = std::make_shared<Entry>();
 
     if (yyextra->current_comment &&
       (yyextra->current->name.isEmpty() || yyextra->current_comment->name == pname)) {
@@ -1055,8 +1058,10 @@ static std::shared_ptr<Entry> buildPredEntry(yyscan_t yyscanner, Pred p) {
     //      newp = yyextra->current_comment;
     // return newp;
     //} else {
-  }
+    newp =yyextra->current_comment;
+  } else {
   yyextra->current_root->moveToSubEntryAndRefresh(newp);
+  }
   yyextra->current->argList.clear();
   yyextra->current->section = Entry::CLASS_SEC;
   yyextra->current->spec = ClassDef::Struct;
@@ -1097,6 +1102,7 @@ static std::shared_ptr<Entry> predBind(yyscan_t yyscanner, Pred p) {
 // use an hash table to store all predi≈ cate calls, so that we can track down
   // arity; if we have comments available, it's our chance....
   std::shared_ptr<Entry> e;
+  e =  yyextra->current            = std::make_shared<Entry>();
 
   e = buildPredEntry(yyscanner,p);
   yyextra->current_comment = 0;
@@ -1557,7 +1563,6 @@ static void parseCompounds(yyscan_t yyscanner,std::shared_ptr<Entry> rt)
       }
       yyextra->yyFileName = ce->fileName;
       yyextra->yyLineNr   = ce->bodyLine ;
-      yyextra->current = std::make_shared<Entry>();
       newEntry(yyscanner);
 
       QCString name = ce->name;
@@ -1619,10 +1624,7 @@ FileInfo fi(fileName.str());
 
   rt->moveToSubEntryAndRefresh(yyextra->current);
 
-  yyextra->current_root = rt;
 
-  yyextra->current            = std::make_shared<Entry>();
-  initEntry(yyscanner);
  initParser(yyscanner);
 
 
@@ -1674,7 +1676,7 @@ yyextra->current_module = "prolog";
 
 PrologOutlineParser::~PrologOutlineParser()
 {
- /* prologscannerYYlex_destroy(p->yyscanner); */
+ prologscannerYYlex_destroy(p->yyscanner);
 }
 
 

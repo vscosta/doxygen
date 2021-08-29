@@ -1851,7 +1851,6 @@ static void parseMain(yyscan_t yyscanner, const QCString &fileName,const char *f
     pos = scope.find("::",startPos);
     startPos=pos+2;
     if (pos==-1) pos=(int)scope.length();
-    yyextra->current            = std::make_shared<Entry>();
     initEntry(yyscanner);
     yyextra->current->name      = scope.left(pos);
     yyextra->current->section   = Entry::NAMESPACE_SEC;
@@ -1862,6 +1861,7 @@ static void parseMain(yyscan_t yyscanner, const QCString &fileName,const char *f
     yyextra->current_root       = yyextra->current;
     rt->moveToSubEntryAndRefresh(yyextra->current);
   } while (pos<(int)scope.length());
+    yyextra->current            = std::make_shared<Entry>();
 
   initParser(yyscanner);
 
