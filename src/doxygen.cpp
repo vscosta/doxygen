@@ -10902,11 +10902,7 @@ void readConfiguration(int argc, char **argv)
           Config::updateObsolete();
           Config::checkAndCorrect(Config_getBool(QUIET));
 
-          QCString outputLanguage=Config_getEnum(OUTPUT_LANGUAGE);
-          if (!setTranslator(outputLanguage))
-          {
-            warn_uncond("Output language %s not supported! Using English instead.\n", qPrint(outputLanguage));
-          }
+          setTranslator(Config_getEnum(OUTPUT_LANGUAGE));
 
           std::ofstream f;
           if (openOutputFile(argv[optind+1],f))
@@ -10952,11 +10948,7 @@ void readConfiguration(int argc, char **argv)
           Config::updateObsolete();
           Config::checkAndCorrect(Config_getBool(QUIET));
 
-          QCString outputLanguage=Config_getEnum(OUTPUT_LANGUAGE);
-          if (!setTranslator(outputLanguage))
-          {
-            warn_uncond("Output language %s not supported! Using English instead.\n", qPrint(outputLanguage));
-          }
+          setTranslator(Config_getEnum(OUTPUT_LANGUAGE));
 
           std::ofstream f;
           if (openOutputFile(argv[optind+1],f))
@@ -11160,12 +11152,7 @@ void adjustConfiguration()
   Doxygen::mscFileNameLinkedMap = new FileNameLinkedMap;
   Doxygen::diaFileNameLinkedMap = new FileNameLinkedMap;
 
-  QCString outputLanguage=Config_getEnum(OUTPUT_LANGUAGE);
-  if (!setTranslator(outputLanguage))
-  {
-    warn_uncond("Output language %s not supported! Using English instead.\n",
-       qPrint(outputLanguage));
-  }
+  setTranslator(Config_getEnum(OUTPUT_LANGUAGE));
 
   /* Set the global html file extension. */
   Doxygen::htmlFileExtension = Config_getString(HTML_FILE_EXTENSION);
@@ -12273,7 +12260,7 @@ void generateOutput()
       && !Config_getBool(USE_MATHJAX))
   {
     g_s.begin("Generating images for formulas in HTML...\n");
-    fm.generateImages(Config_getString(HTML_OUTPUT), Config_getEnum(HTML_FORMULA_FORMAT)=="svg" ?
+    fm.generateImages(Config_getString(HTML_OUTPUT), Config_getEnum(HTML_FORMULA_FORMAT)==HTML_FORMULA_FORMAT_t::svg ?
         FormulaManager::Format::Vector : FormulaManager::Format::Bitmap, FormulaManager::HighDPI::On);
     g_s.end();
   }

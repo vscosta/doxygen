@@ -1589,29 +1589,20 @@ void Config::checkAndCorrect(bool quiet)
 
   //------------------------
   // check and correct PAPER_TYPE
-  QCString paperType = Config_getEnum(PAPER_TYPE);
+  QCString paperType = Config_getEnumAsString(PAPER_TYPE);
   paperType=paperType.lower().stripWhiteSpace();
   if (paperType.isEmpty() || paperType=="a4wide")
   {
-    paperType = "a4";
+    // use a4
+    Config_updateEnum(PAPER_TYPE,PAPER_TYPE_t::a4);
   }
-  if (paperType!="a4" && paperType!="letter" &&
-      paperType!="legal" && paperType!="executive")
+  else if (paperType!="a4" && paperType!="letter" &&
+           paperType!="legal" && paperType!="executive")
   {
-    err("Unknown page type specified\n");
-    paperType="a4";
+    err("Unknown page type '%s' specified\n",qPrint(paperType));
+    Config_updateEnum(PAPER_TYPE,PAPER_TYPE_t::a4);
   }
-  Config_updateEnum(PAPER_TYPE,paperType);
 
-  //------------------------
-  // check & correct OUTPUT_LANGUAGE
-  QCString outputLanguage=Config_getEnum(OUTPUT_LANGUAGE);
-  outputLanguage=outputLanguage.stripWhiteSpace();
-  if (outputLanguage.isEmpty())
-  {
-    outputLanguage = "English";
-  }
-  Config_updateEnum(OUTPUT_LANGUAGE,outputLanguage);
 
   //------------------------
   // check & correct HTML_FILE_EXTENSION
@@ -1673,20 +1664,20 @@ void Config::checkAndCorrect(bool quiet)
   // Test to see if MathJax code file is valid
   if (Config_getBool(USE_MATHJAX))
   {
-    QCString mathJaxFormat = Config_getEnum(MATHJAX_FORMAT);
-    QCString mathjaxVersion = Config_getEnum(MATHJAX_VERSION);
-    if (!mathJaxFormat.isEmpty())
+    auto mathJaxFormat = Config_getEnum(MATHJAX_FORMAT);
+    auto mathjaxVersion = Config_getEnum(MATHJAX_VERSION);
+    if (mathjaxVersion == MATHJAX_VERSION_t::MathJax_2)
     {
-      if (mathjaxVersion == "MathJax_2")
+      if (mathJaxFormat==MATHJAX_FORMAT_t::chtml)
       {
-        if (mathJaxFormat=="chtml") Config_updateEnum(MATHJAX_FORMAT,"HTML-CSS");
+        Config_updateEnum(MATHJAX_FORMAT,MATHJAX_FORMAT_t::HTML_CSS);
       }
-      else
+    }
+    else
+    {
+      if (mathJaxFormat==MATHJAX_FORMAT_t::HTML_CSS || mathJaxFormat==MATHJAX_FORMAT_t::NativeMML)
       {
-        if (mathJaxFormat=="HTML-CSS" || mathJaxFormat=="NativeMML")
-        {
-          Config_updateEnum(MATHJAX_FORMAT,"chtml");
-        }
+        Config_updateEnum(MATHJAX_FORMAT,MATHJAX_FORMAT_t::chtml);
       }
     }
 
@@ -1703,13 +1694,11 @@ void Config::checkAndCorrect(bool quiet)
     QCString path = Config_getString(MATHJAX_RELPATH);
     if (path.isEmpty())
     {
-      if (mathjaxVersion == "MathJax_2")
+      path = "https://cdn.jsdelivr.net/npm/mathjax@";
+      switch (mathjaxVersion)
       {
-        path = "https://cdn.jsdelivr.net/npm/mathjax@2";
-      }
-      else
-      {
-        path = "https://cdn.jsdelivr.net/npm/mathjax@3";
+        case MATHJAX_VERSION_t::MathJax_2: path += "2"; break;
+        case MATHJAX_VERSION_t::MathJax_3: path += "3"; break;
       }
     }
 
@@ -1843,16 +1832,6 @@ void Config::checkAndCorrect(bool quiet)
     err("When enabling INLINE_GROUPED_CLASSES the SEPARATE_MEMBER_PAGES option should be disabled. I'll do it for you.\n");
     Config_updateBool(SEPARATE_MEMBER_PAGES,FALSE);
   }
-
-  //------------------------
-  // check and correct DOT_IMAGE_FORMAT
-  QCString dotImageFormat=Config_getEnum(DOT_IMAGE_FORMAT);
-  dotImageFormat=dotImageFormat.stripWhiteSpace();
-  if (dotImageFormat.isEmpty())
-  {
-    dotImageFormat = "png";
-  }
-  Config_updateEnum(DOT_IMAGE_FORMAT,dotImageFormat);
 
   //------------------------
   // correct DOT_FONTNAME if needed
@@ -2214,7 +2193,8 @@ void Config::updateObsolete()
   ConfigOption *classDiagramsOpt = ConfigImpl::instance()->get("CLASS_DIAGRAMS");
   ConfigOption *haveDotOpt       = ConfigImpl::instance()->get("HAVE_DOT");
   ConfigOption *classGraphOpt    = ConfigImpl::instance()->get("CLASS_GRAPH");
-  if (classDiagramsOpt && classDiagramsOpt->kind()==ConfigOption::O_Obsolete && haveDotOpt && classGraphOpt)
+  if (classDiagramsOpt && classDiagramsOpt->kind()==ConfigOption::O_Obsolete &&
+      haveDotOpt && classGraphOpt)
   {
     ConfigObsolete *classDiagramsOpt_ = dynamic_cast<ConfigObsolete*>(classDiagramsOpt);
     ConfigBool     *haveDotOpt_       = dynamic_cast<ConfigBool*>(haveDotOpt);
@@ -2223,10 +2203,10 @@ void Config::updateObsolete()
     {
       QCString classDiagramValue = *classDiagramsOpt_->valueStringRef();
       QCString haveDotValue      = *haveDotOpt_->valueStringRef();
-      QCString &classGraphValue   = *classGraphOpt_->valueRef();
-      bool isValid1=false, isValid2=false;
+      QCString &classGraphValue  = *classGraphOpt_->valueRef();
+      bool isValid1=true, isValid2=true;
       bool bClassDiagrams = convertStringToBool(classDiagramValue,isValid1);
-      bool bHaveDot       = convertStringToBool(haveDotValue,     isValid2);
+      bool bHaveDot       = haveDotValue.isEmpty() ? false : convertStringToBool(haveDotValue,     isValid2);
       if (isValid1 && isValid2 && !bClassDiagrams && !bHaveDot && classGraphValue.lower()=="yes")
       {
         warn_uncond("Changing CLASS_GRAPH option to TEXT because obsolete option CLASS_DIAGRAM was found and set to NO.\n");
