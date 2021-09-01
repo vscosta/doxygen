@@ -3578,7 +3578,7 @@ static void addAnchor(yyscan_t yyscanner,const QCString &anchor)
 static inline void addOutput(yyscan_t yyscanner,const char *s)
 {
   struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
-  //printf("addOutput(yyscanner,%s)\n",s);
+  //    printf("addOutput(yyscanner,%s)\n",s);
   *yyextra->pOutputString+=s;
 }
 

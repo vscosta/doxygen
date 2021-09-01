@@ -109,7 +109,6 @@ static void startCodeLine(yyscan_t yyscanner);
 static void codify(yyscan_t yyscanner,QCString & text);
 static void codify(yyscan_t yyscanner,const char * text);
 static void endCodeLine(yyscan_t yyscanner);
-static void nextCodeLine(yyscan_t yyscanner);
 static void writeMultiLineCodeLink(yyscan_t yyscanner,
     CodeOutputInterface &ol,
                   const Definition *d,
@@ -710,19 +709,6 @@ static void endCodeLine(yyscan_t yyscanner)
  endFontClass( yyscanner);
    yyextra->code->endCodeLine();
 }
-
-static void nextCodeLine(yyscan_t yyscanner)
-{
-    struct yyguts_t *yyg = (struct yyguts_t*)yyscanner;
-  const char *fc =  yyextra->currentFontClass;
-  endCodeLine(yyscanner);
-  if ( yyextra->yyLineNr< yyextra->inputLines)
-  {
-     yyextra->currentFontClass = fc;
-    startCodeLine(   yyscanner );
-  }
-}
-
 
 /*! writes a link to a fragment \a text that may span multiple lines, inserting
  * line numbers for each line. If \a text contains newlines, the link will be

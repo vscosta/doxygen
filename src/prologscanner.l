@@ -174,7 +174,6 @@ Clause current_clause;
 
     static std::shared_ptr<Entry> predBind(yyscan_t yyscanner, Pred p);
 
-    static QCString newModule( yyscan_t yyscanner, const char *modname);
 
 
 /*
@@ -187,10 +186,6 @@ Clause current_clause;
     static bool prepComment( yyscan_t yyscanner, const char * text, bool &brief, bool slash_star);
     static void handleCommentBlock( yyscan_t yyscanner, const QCString &doc, bool brief);
     static void endOfDef( yyscan_t yyscanner);
-    static void initSpecialBlock( yyscan_t yyscanner ) ;
-    static QCString newModule( yyscan_t yyscanner, QCString modnamep);
-    static QCString newModule( yyscan_t yyscanner, const char *modname);
-    static void searchFoundDef( yyscan_t yyscanner );
     static bool addPredDecl( yyscan_t yyscanner, QCString name);
     static bool addPredDecl( yyscan_t yyscanner, QCString mod, QCString name, uint arity);
     static char *sliceArgument(const char *inp, int c) ;
@@ -785,19 +780,6 @@ static void showScannerNode( yyscan_t yyscanner, uint off, std::shared_ptr<Entry
 #endif
 //-----------------------------------------------------------------------------
 
-static QCString stripQuotes(   QCString item) {
-  if (item.isEmpty())
-    return item;
-  const char *s = item.data();
-  size_t last = strlen(s) - 1;
-  if (s[0] == '\'' && s[last] == '\'') {
-    item.remove(last, 1);
-    item.remove(0, 1);
-  }
-  return item;
-}
-
-
 // We should accept ({atom}":")*{atom}("/"{nat})?
 // in this case, as no grouping operators are available
 //  we step backwards
@@ -932,7 +914,6 @@ QCString t;
   QCString otext = "", line;
   int c = (slash_star ? 3 : 2);
   int ch;
-  int nltext=0,nlines=0,o=0;
  while ((ch=text[c++])!='\n' && ch) otext += ch;
  otext += '\n';
 

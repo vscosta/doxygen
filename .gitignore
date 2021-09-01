@@ -2,7 +2,8 @@
 .*sw?
 \#*
 .DS_Store
-
+CMakeFiles
+CMakeScripts
 *.rej
 *.orig
 
@@ -10,13 +11,13 @@
 /packages/rpm/doxygen.spec
 *.idb
 *.pdb
-
+generated_src
 /doxygen_docs
 /doxygen.tag
 /build*
 /qtools_docs
 /warnings.log
-
+Debug
 tags
-
+DEBUG
 .idea

@@ -1,0 +1,1876 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="doxygen"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake\;CMake Files\cmake\Sanitizers\;CMake Files\libmd5\;CMake Files\liblodepng\;CMake Files\libmscgen\;CMake Files\libversion\;CMake Files\qtools\;CMake Files\vhdlparser\;CMake Files\src\;CMake Files\addon\;CMake Files\testing\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/vsc/github/doxygen"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/Users/vsc/github/doxygen"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/Users/vsc/github/doxygen"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/Users/vsc/github/doxygen"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/Users/vsc/github/doxygen"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test">
+				<Option working_dir="/Users/vsc/github/doxygen"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="package_source">
+				<Option working_dir="/Users/vsc/github/doxygen"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 package_source"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/vsc/github/doxygen"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/vsc/github/doxygen"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="package">
+				<Option working_dir="/Users/vsc/github/doxygen"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 package"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="md5">
+				<Option output="/Users/vsc/github/doxygen/lib/libmd5.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/libmd5"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmd5/Makefile&quot;  VERBOSE=1 md5"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmd5/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmd5/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmd5/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="md5/fast">
+				<Option output="/Users/vsc/github/doxygen/lib/libmd5.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/libmd5"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmd5/Makefile&quot;  VERBOSE=1 md5/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmd5/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmd5/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmd5/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lodepng">
+				<Option output="/Users/vsc/github/doxygen/lib/liblodepng.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/liblodepng"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/liblodepng/Makefile&quot;  VERBOSE=1 lodepng"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/liblodepng/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/liblodepng/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/liblodepng/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lodepng/fast">
+				<Option output="/Users/vsc/github/doxygen/lib/liblodepng.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/liblodepng"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/liblodepng/Makefile&quot;  VERBOSE=1 lodepng/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/liblodepng/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/liblodepng/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/liblodepng/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mscgen">
+				<Option output="/Users/vsc/github/doxygen/lib/libmscgen.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/libmscgen"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/vsc/github/doxygen/liblodepng"/>
+					<Add directory="/Users/vsc/github/doxygen/libmscgen"/>
+					<Add directory="/Users/vsc/github/doxygen/generated_src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmscgen/Makefile&quot;  VERBOSE=1 mscgen"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmscgen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmscgen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmscgen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mscgen/fast">
+				<Option output="/Users/vsc/github/doxygen/lib/libmscgen.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/libmscgen"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/vsc/github/doxygen/liblodepng"/>
+					<Add directory="/Users/vsc/github/doxygen/libmscgen"/>
+					<Add directory="/Users/vsc/github/doxygen/generated_src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmscgen/Makefile&quot;  VERBOSE=1 mscgen/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmscgen/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmscgen/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libmscgen/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="doxygen_version">
+				<Option output="/Users/vsc/github/doxygen/lib/libdoxygen_version.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/libversion"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/vsc/github/doxygen/libversion/."/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 doxygen_version"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="doxygen_version/fast">
+				<Option output="/Users/vsc/github/doxygen/lib/libdoxygen_version.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/libversion"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/vsc/github/doxygen/libversion/."/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 doxygen_version/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="check_doxygen_version">
+				<Option working_dir="/Users/vsc/github/doxygen/libversion"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 check_doxygen_version"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="check_git_repository">
+				<Option working_dir="/Users/vsc/github/doxygen/libversion"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 check_git_repository"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/libversion/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="qtools">
+				<Option output="/Users/vsc/github/doxygen/lib/libqtools.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/qtools"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/vsc/github/doxygen/qtools/."/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/qtools/Makefile&quot;  VERBOSE=1 qtools"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/qtools/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/qtools/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/qtools/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="qtools/fast">
+				<Option output="/Users/vsc/github/doxygen/lib/libqtools.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/qtools"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/vsc/github/doxygen/qtools/."/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/qtools/Makefile&quot;  VERBOSE=1 qtools/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/qtools/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/qtools/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/qtools/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="vhdlparser">
+				<Option output="/Users/vsc/github/doxygen/lib/libvhdlparser.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/vhdlparser"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/vsc/github/doxygen/src"/>
+					<Add directory="/Users/vsc/github/doxygen/qtools"/>
+					<Add directory="/Users/vsc/github/doxygen/vhdlparser"/>
+					<Add directory="/Users/vsc/github/doxygen/generated_src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/vhdlparser/Makefile&quot;  VERBOSE=1 vhdlparser"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/vhdlparser/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/vhdlparser/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/vhdlparser/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="vhdlparser/fast">
+				<Option output="/Users/vsc/github/doxygen/lib/libvhdlparser.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/vhdlparser"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/vsc/github/doxygen/src"/>
+					<Add directory="/Users/vsc/github/doxygen/qtools"/>
+					<Add directory="/Users/vsc/github/doxygen/vhdlparser"/>
+					<Add directory="/Users/vsc/github/doxygen/generated_src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/vhdlparser/Makefile&quot;  VERBOSE=1 vhdlparser/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/vhdlparser/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/vhdlparser/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/vhdlparser/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="generate_configvalues_header">
+				<Option working_dir="/Users/vsc/github/doxygen/src"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 generate_configvalues_header"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="doxymain">
+				<Option output="/Users/vsc/github/doxygen/lib/libdoxymain.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DYY_BUF_SIZE=262144"/>
+					<Add option="-DYY_READ_BUF_SIZE=262144"/>
+					<Add directory="/Users/vsc/github/doxygen/qtools"/>
+					<Add directory="/Users/vsc/github/doxygen/libmd5"/>
+					<Add directory="/Users/vsc/github/doxygen/liblodepng"/>
+					<Add directory="/Users/vsc/github/doxygen/libmscgen"/>
+					<Add directory="/Users/vsc/github/doxygen/libversion"/>
+					<Add directory="/Users/vsc/github/doxygen/vhdlparser"/>
+					<Add directory="/Users/vsc/github/doxygen/src"/>
+					<Add directory="/Users/vsc/github/doxygen/generated_src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 doxymain"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="doxymain/fast">
+				<Option output="/Users/vsc/github/doxygen/lib/libdoxymain.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DYY_BUF_SIZE=262144"/>
+					<Add option="-DYY_READ_BUF_SIZE=262144"/>
+					<Add directory="/Users/vsc/github/doxygen/qtools"/>
+					<Add directory="/Users/vsc/github/doxygen/libmd5"/>
+					<Add directory="/Users/vsc/github/doxygen/liblodepng"/>
+					<Add directory="/Users/vsc/github/doxygen/libmscgen"/>
+					<Add directory="/Users/vsc/github/doxygen/libversion"/>
+					<Add directory="/Users/vsc/github/doxygen/vhdlparser"/>
+					<Add directory="/Users/vsc/github/doxygen/src"/>
+					<Add directory="/Users/vsc/github/doxygen/generated_src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 doxymain/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="doxygen">
+				<Option output="/Users/vsc/github/doxygen/bin/doxygen" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DYY_BUF_SIZE=262144"/>
+					<Add option="-DYY_READ_BUF_SIZE=262144"/>
+					<Add directory="/Users/vsc/github/doxygen/qtools"/>
+					<Add directory="/Users/vsc/github/doxygen/libmd5"/>
+					<Add directory="/Users/vsc/github/doxygen/liblodepng"/>
+					<Add directory="/Users/vsc/github/doxygen/libmscgen"/>
+					<Add directory="/Users/vsc/github/doxygen/libversion"/>
+					<Add directory="/Users/vsc/github/doxygen/vhdlparser"/>
+					<Add directory="/Users/vsc/github/doxygen/src"/>
+					<Add directory="/Users/vsc/github/doxygen/generated_src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 doxygen"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="doxygen/fast">
+				<Option output="/Users/vsc/github/doxygen/bin/doxygen" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DYY_BUF_SIZE=262144"/>
+					<Add option="-DYY_READ_BUF_SIZE=262144"/>
+					<Add directory="/Users/vsc/github/doxygen/qtools"/>
+					<Add directory="/Users/vsc/github/doxygen/libmd5"/>
+					<Add directory="/Users/vsc/github/doxygen/liblodepng"/>
+					<Add directory="/Users/vsc/github/doxygen/libmscgen"/>
+					<Add directory="/Users/vsc/github/doxygen/libversion"/>
+					<Add directory="/Users/vsc/github/doxygen/vhdlparser"/>
+					<Add directory="/Users/vsc/github/doxygen/src"/>
+					<Add directory="/Users/vsc/github/doxygen/generated_src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 doxygen/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="doxycfg">
+				<Option output="/Users/vsc/github/doxygen/lib/libdoxycfg.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DYY_BUF_SIZE=262144"/>
+					<Add option="-DYY_READ_BUF_SIZE=262144"/>
+					<Add directory="/Users/vsc/github/doxygen/qtools"/>
+					<Add directory="/Users/vsc/github/doxygen/libmd5"/>
+					<Add directory="/Users/vsc/github/doxygen/liblodepng"/>
+					<Add directory="/Users/vsc/github/doxygen/libmscgen"/>
+					<Add directory="/Users/vsc/github/doxygen/libversion"/>
+					<Add directory="/Users/vsc/github/doxygen/vhdlparser"/>
+					<Add directory="/Users/vsc/github/doxygen/src"/>
+					<Add directory="/Users/vsc/github/doxygen/generated_src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 doxycfg"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="doxycfg/fast">
+				<Option output="/Users/vsc/github/doxygen/lib/libdoxycfg.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vsc/github/doxygen/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DYY_BUF_SIZE=262144"/>
+					<Add option="-DYY_READ_BUF_SIZE=262144"/>
+					<Add directory="/Users/vsc/github/doxygen/qtools"/>
+					<Add directory="/Users/vsc/github/doxygen/libmd5"/>
+					<Add directory="/Users/vsc/github/doxygen/liblodepng"/>
+					<Add directory="/Users/vsc/github/doxygen/libmscgen"/>
+					<Add directory="/Users/vsc/github/doxygen/libversion"/>
+					<Add directory="/Users/vsc/github/doxygen/vhdlparser"/>
+					<Add directory="/Users/vsc/github/doxygen/src"/>
+					<Add directory="/Users/vsc/github/doxygen/generated_src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 doxycfg/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tests">
+				<Option working_dir="/Users/vsc/github/doxygen/testing"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/testing/Makefile&quot;  VERBOSE=1 tests"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vsc/github/doxygen/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/VhdlParser_adj.cc">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/VhdlParser_adj.cc.rule">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/ce_parse.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/ce_parse.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/ce_parse.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/ce_parse.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/code.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/code.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/code.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/code.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/commentcnv.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/commentcnv.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/commentcnv.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/commentcnv.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/commentscan.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/commentscan.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/commentscan.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/commentscan.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/configimpl.cpp">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/configimpl.cpp.rule">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/configimpl.l.h">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/configimpl.l.h.rule">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/configoptions.cpp">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/configoptions.cpp.rule">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/configvalues.cpp">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/configvalues.cpp.rule">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/configvalues.h">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/configvalues.h.rule">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/constexp.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/constexp.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/constexp.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/constexp.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/declinfo.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/declinfo.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/declinfo.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/declinfo.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/defargs.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/defargs.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/defargs.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/defargs.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/doctokenizer.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/doctokenizer.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/doctokenizer.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/doctokenizer.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/doxyversion.cpp">
+			<Option target="doxygen_version"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/fortrancode.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/fortrancode.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/fortrancode.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/fortrancode.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/fortranscanner.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/fortranscanner.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/fortranscanner.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/fortranscanner.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/gitversion.cpp">
+			<Option target="doxygen_version"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/lang_cfg.h">
+			<Option target="doxymain"/>
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/lang_cfg.h.rule">
+			<Option target="doxymain"/>
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/layout_default.xml.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/layout_default.xml.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/mscgen_language.cpp">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/mscgen_language.cpp.rule">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/mscgen_language.hpp">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/mscgen_lexer.cpp">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/mscgen_lexer.cpp.rule">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/mscgen_lexer.l.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/mscgen_lexer.l.h.rule">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pre.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pre.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pre.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pre.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/prologcode.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/prologcode.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/prologcode.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/prologcode.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/prologscanner.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/prologscanner.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/prologscanner.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/prologscanner.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pycode.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pycode.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pycode.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pycode.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pyscanner.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pyscanner.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pyscanner.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/pyscanner.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/resources.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/resources.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/scanner.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/scanner.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/scanner.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/scanner.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/settings.h">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/sqlcode.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/sqlcode.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/sqlcode.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/sqlcode.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/vhdlcode.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/vhdlcode.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/vhdlcode.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/vhdlcode.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/xmlcode.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/xmlcode.cpp.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/xmlcode.l.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/generated_src/xmlcode.l.h.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/liblodepng/lodepng.cpp">
+			<Option target="lodepng"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/liblodepng/lodepng.h">
+			<Option target="lodepng"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmd5/md5.c">
+			<Option target="md5"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmd5/md5.h">
+			<Option target="md5"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gd.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gd.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gd_color.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gd_color.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gd_lodepng.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gd_security.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gdfonts.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gdfonts.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gdfontt.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gdfontt.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gdhelpers.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gdhelpers.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/gdtables.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_adraw.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_adraw.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_api.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_api.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_gd_out.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_msc.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_msc.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_null_out.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_ps_out.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_safe.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_safe.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_svg_out.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_usage.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_usage.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_utf8.c">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/mscgen_utf8.h">
+			<Option target="mscgen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libversion/fullversion.cpp">
+			<Option target="doxygen_version"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qbuffer.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qbuffer.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qcollection.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qcollection.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qcstring.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qcstring.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qcstringlist.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qcstringlist.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qdatastream.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qdatastream.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qdatetime.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qdatetime.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qdir.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qdir.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qdir_unix.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qfile.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qfile.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qfile_unix.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qfileinfo.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qfileinfo.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qfileinfo_unix.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qgarray.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qgarray.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qgdict.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qgdict.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qglist.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qglist.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qglobal.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qglobal.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qgstring.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qgstring.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qiodevice.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qiodevice.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qmap.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qmap.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qregexp.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qregexp.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qstring.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qstring.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qstringlist.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qstringlist.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qtextcodec.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qtextcodec.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qtextstream.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qtextstream.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qutfcodec.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qutfcodec.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qxml.cpp">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/qxml.h">
+			<Option target="qtools"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/arguments.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/arguments.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/cite.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/cite.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/clangparser.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/clangparser.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/classdef.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/classdef.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/classlist.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/classlist.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/cmdmapper.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/cmdmapper.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/code.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/commentcnv.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/commentscan.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/condparser.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/condparser.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/configimpl.l.rule">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/constexp.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/constexp.y.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/context.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/context.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/cppvalue.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/cppvalue.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/debug.cpp">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/debug.h">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/declinfo.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/defargs.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/defgen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/defgen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/definition.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/definition.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dia.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dia.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/diagram.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/diagram.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dirdef.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dirdef.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docbookgen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docbookgen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docbookvisitor.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docbookvisitor.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docgroup.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docgroup.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docparser.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docparser.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docsets.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docsets.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/doctokenizer.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docvisitor.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/docvisitor.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dot.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dot.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotcallgraph.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotcallgraph.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotclassgraph.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotclassgraph.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotdirdeps.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotdirdeps.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotfilepatcher.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotfilepatcher.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotgfxhierarchytable.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotgfxhierarchytable.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotgraph.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotgraph.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotgroupcollaboration.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotgroupcollaboration.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotincldepgraph.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotincldepgraph.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotlegendgraph.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotlegendgraph.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotnode.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotnode.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotrunner.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/dotrunner.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/doxygen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/doxygen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/eclipsehelp.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/eclipsehelp.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/emoji.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/emoji.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/entry.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/entry.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/filedef.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/filedef.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/fileparser.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/fileparser.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/formula.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/formula.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/fortrancode.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/fortranscanner.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/ftextstream.cpp">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/ftextstream.h">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/ftvhelp.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/ftvhelp.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/groupdef.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/groupdef.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/htags.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/htags.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/htmldocvisitor.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/htmldocvisitor.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/htmlentity.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/htmlentity.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/htmlgen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/htmlgen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/htmlhelp.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/htmlhelp.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/image.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/image.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/index.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/index.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/language.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/language.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/latexdocvisitor.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/latexdocvisitor.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/latexgen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/latexgen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/layout.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/layout.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/main.cpp">
+			<Option target="doxygen"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/mandocvisitor.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/mandocvisitor.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/mangen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/mangen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/markdown.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/markdown.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/memberdef.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/memberdef.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/membergroup.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/membergroup.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/memberlist.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/memberlist.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/message.cpp">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/message.h">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/msc.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/msc.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/namespacedef.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/namespacedef.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/outputgen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/outputgen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/outputlist.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/outputlist.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/pagedef.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/pagedef.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/perlmodgen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/perlmodgen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/plantuml.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/plantuml.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/portable.cpp">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/portable.h">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/portable_c.c">
+			<Option target="doxycfg"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/pre.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/prologcode.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/prologscanner.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/pycode.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/pyscanner.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/qhp.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/qhp.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/qhpxmlwriter.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/qhpxmlwriter.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/reflist.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/reflist.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/resourcemgr.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/resourcemgr.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/rtfdocvisitor.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/rtfdocvisitor.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/rtfgen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/rtfgen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/rtfstyle.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/rtfstyle.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/scanner.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/searchindex.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/searchindex.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/sqlcode.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/sqlite3gen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/sqlite3gen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/stlsupport.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/stlsupport.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/symbolresolver.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/symbolresolver.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/tagreader.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/tagreader.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/template.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/template.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/textdocvisitor.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/textdocvisitor.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/tooltip.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/tooltip.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/util.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/util.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/vhdlcode.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/vhdldocgen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/vhdldocgen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/vhdljjparser.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/vhdljjparser.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/xmlcode.l.rule">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/xmldocvisitor.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/xmldocvisitor.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/xmlgen.cpp">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/xmlgen.h">
+			<Option target="doxymain"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/CharStream.cc">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/CharStream.h">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/ParseException.cc">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/ParseException.h">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/Token.cc">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/Token.h">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/TokenMgrError.cc">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/TokenMgrError.h">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/VhdlParserTokenManager.cc">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/VhdlParserTokenManager.h">
+			<Option target="vhdlparser"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/CompilerWarnings.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/Coverage.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/FindIconv.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/FindJavacc.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/doxygen_version.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/git_watcher.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/packaging.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/version.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/Sanitizers/FindASan.cmake">
+			<Option virtualFolder="CMake Files\cmake\Sanitizers\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/Sanitizers/FindMSan.cmake">
+			<Option virtualFolder="CMake Files\cmake\Sanitizers\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/Sanitizers/FindSanitizers.cmake">
+			<Option virtualFolder="CMake Files\cmake\Sanitizers\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/Sanitizers/FindTSan.cmake">
+			<Option virtualFolder="CMake Files\cmake\Sanitizers\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/Sanitizers/FindUBSan.cmake">
+			<Option virtualFolder="CMake Files\cmake\Sanitizers\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/cmake/Sanitizers/sanitize-helpers.cmake">
+			<Option virtualFolder="CMake Files\cmake\Sanitizers\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmd5/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\libmd5\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/liblodepng/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\liblodepng\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libmscgen/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\libmscgen\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libversion/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\libversion\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/libversion/doxyversion.cpp.in">
+			<Option virtualFolder="CMake Files\libversion\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/qtools/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\qtools\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/vhdlparser/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\vhdlparser\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/addon/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\addon\"/>
+		</Unit>
+		<Unit filename="/Users/vsc/github/doxygen/testing/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\testing\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
